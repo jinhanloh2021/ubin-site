@@ -8,6 +8,7 @@ import Head from 'next/head';
 import { CMS_NAME } from '../lib/constants';
 import Post from '../interfaces/post';
 import Image from 'next/image';
+import AuthorTag from '../components/author-tag';
 
 type Props = {
   allPosts: Post[];
@@ -29,20 +30,29 @@ export default function Index({ allPosts }: Props) {
             Ubin Kakis
           </h1>
         </div>
-        {/* <Container>
-          <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+        <div id='About Us'>
+          <h3 className='mt-24 mb-8 text-center font-body text-5xl font-semibold'>
+            Our Project
+          </h3>
+          <div className='bg-[url(/assets/Images/UbinKakisLogo.png)] h-[29.5rem] bg-center bg-no-repeat' />
+          <div className='flex flex-col justify-center items-center'>
+            <p className='my-8 text-center font-body text-2xl leading-9 mx-[30%]'>
+              Our goal for this project is to form meaningful connections with
+              the communities on Pulau Ubin and share their cultures and kampung
+              life with more Singaporeans. We'll be releasing content on a
+              regular basis, and we sincerely hope that more Singaporeans will
+              come to appreciate the cultural significance of Pulau Ubin.
+            </p>
+            <AuthorTag
+              position='left'
+              name={'Ansley'}
+              title={'Project Leader'}
             />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container> */}
+          </div>
+          <div
+            className={`bg-[url(/assets/Images/DouDouandLeLe.png)] h-[60vh] bg-cover bg-no-repeat bg-center my-16`}
+          />
+        </div>
       </Layout>
     </div>
   );
