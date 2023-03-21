@@ -7,6 +7,7 @@ import { getAllPosts } from '../lib/api';
 import Head from 'next/head';
 import { CMS_NAME } from '../lib/constants';
 import Post from '../interfaces/post';
+import Image from 'next/image';
 
 type Props = {
   allPosts: Post[];
@@ -19,9 +20,16 @@ export default function Index({ allPosts }: Props) {
     <div className='font-display bg-bg_paper'>
       <Layout>
         <Head>
-          <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
+          <title>{`Ubin Kakis`}</title>
         </Head>
-        <Container>
+        <div
+          className={`bg-[url(/assets/Images/${'BicycleRental1.png'})] h-[100vh] bg-cover bg-no-repeat bg-center`}
+        >
+          <h1 className='absolute text-center left-0 right-0 m-auto top-[30%] font-script lg:text-9xl md:text-7xl text-5xl text-black/80 select-none drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)]'>
+            Ubin Kakis
+          </h1>
+        </div>
+        {/* <Container>
           <Intro />
           {heroPost && (
             <HeroPost
@@ -34,7 +42,7 @@ export default function Index({ allPosts }: Props) {
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container>
+        </Container> */}
       </Layout>
     </div>
   );
