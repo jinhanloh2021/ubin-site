@@ -9,6 +9,9 @@ module.exports = {
         'accent-7': '#333',
         success: '#0070f3',
         cyan: '#79FFE1',
+        offBlack: '#222222',
+        bodySecondary: '#777777',
+        bg_paper: '#FFFCF8',
       },
       spacing: {
         28: '7rem',
@@ -25,6 +28,12 @@ module.exports = {
         '7xl': '4.5rem',
         '8xl': '6.25rem',
       },
+      fontFamily: {
+        display: ['Inter', 'sans-serif'],
+        body: ['EB Garamond', 'serif'],
+        body_italic: ['EB Garamond Italic', 'EB Garamond', 'serif'],
+        script: ['Knewave', 'cursive'],
+      },
       boxShadow: {
         sm: '0 5px 10px rgba(0, 0, 0, 0.12)',
         md: '0 8px 30px rgba(0, 0, 0, 0.12)',
@@ -32,4 +41,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

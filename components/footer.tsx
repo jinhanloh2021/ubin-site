@@ -1,17 +1,52 @@
+import Image from 'next/image';
+
 const Footer = () => {
   return (
-    <footer className='bg-neutral-50 border-t border-neutral-200'>
-      <div className='mx-auto px-5 container'>
-        <h4 className='text-base text-center my-4 font-semibold'>Contact Us</h4>
-        <div className='flex flex-row justify-center align-middle'>
-          <a href='/' className=''>
-            Read Documentation
+    <footer className='border-t border-[#CCCCCC] min-h-fit lg:mx-[16%] md:mx-4 mx-1'>
+      <div className='mx-auto container'>
+        <h4 className='text-base text-center my-8 font-semibold'>Contact Us</h4>
+        <div className='flex flex-row justify-center align-middle gap-16 lg:mb-4 mb-8'>
+          <a href='https://www.instagram.com/ubinkakis/'>
+            <Image
+              priority
+              src={'/assets/SVGs/instagram.svg'}
+              alt='envelope'
+              width={32}
+              height={32}
+            />
           </a>
-          <a href='/' className=''>
-            View on GitHub
+          <a href='https://www.facebook.com'>
+            <Image
+              priority
+              src={'/assets/SVGs/facebook.svg'}
+              alt='envelope'
+              width={32}
+              height={32}
+            />
+          </a>
+          <a href='https://www.linkedin.com'>
+            <Image
+              priority
+              src={'/assets/SVGs/linkedin.svg'}
+              alt='envelope'
+              width={32}
+              height={32}
+            />
+          </a>
+          <a href='https://smu.edu.sg'>
+            <Image
+              priority
+              src={'/assets/SVGs/email.svg'}
+              alt='envelope'
+              width={32}
+              height={32}
+            />
           </a>
         </div>
       </div>
+      <p className='font-display font-medium text-sm text-right mb-4 text-bodySecondary'>
+        ©2023 Ubin Kakis
+      </p>
     </footer>
   );
 };
