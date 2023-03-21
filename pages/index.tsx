@@ -1,13 +1,7 @@
-import Container from '../components/container';
-import MoreStories from '../components/more-stories';
-import HeroPost from '../components/hero-post';
-import Intro from '../components/intro';
 import Layout from '../components/layout';
 import { getAllPosts } from '../lib/api';
 import Head from 'next/head';
-import { CMS_NAME } from '../lib/constants';
 import Post from '../interfaces/post';
-import Image from 'next/image';
 import AuthorTag from '../components/author-tag';
 
 type Props = {
@@ -15,22 +9,21 @@ type Props = {
 };
 
 export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
   return (
     <div className='font-display bg-bg_paper'>
       <Layout>
         <Head>
           <title>{`Ubin Kakis`}</title>
         </Head>
-        <div
+        <section
+          id='Landing img'
           className={`bg-[url(/assets/Images/${'BicycleRental1.png'})] h-[100vh] bg-cover bg-no-repeat bg-center`}
         >
           <h1 className='absolute text-center left-0 right-0 m-auto top-[30%] font-script lg:text-9xl md:text-7xl text-5xl text-black/80 select-none drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)]'>
             Ubin Kakis
           </h1>
-        </div>
-        <div id='About Us'>
+        </section>
+        <section id='About Us'>
           <h3 className='mt-24 mb-8 text-center font-body text-5xl font-semibold'>
             Our Project
           </h3>
@@ -50,9 +43,11 @@ export default function Index({ allPosts }: Props) {
             />
           </div>
           <div
-            className={`bg-[url(/assets/Images/DouDouandLeLe.png)] h-[60vh] bg-cover bg-no-repeat bg-center my-16`}
+            className={`bg-[url(/assets/Images/DouDouAndLeLe.png)] h-[60vh] bg-cover bg-no-repeat bg-center my-16`}
           />
-        </div>
+        </section>
+        <section id='journal'></section>
+        <section id='team'></section>
       </Layout>
     </div>
   );
