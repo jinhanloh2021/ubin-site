@@ -1,5 +1,3 @@
-import Layout from '../components/layout';
-import { getAllPosts } from '../lib/api';
 import Head from 'next/head';
 import Post from '../interfaces/PostType';
 import AuthorTag from '../components/author-tag';
@@ -8,7 +6,6 @@ import Image from 'next/image';
 import CoverImage from '../components/CoverImage';
 
 type Props = {
-  allPosts: Post[];
   missionText: string;
 };
 
@@ -57,18 +54,9 @@ export default function Home({ missionText }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ]);
   const missionText =
     "Our goal for this project is to form meaningful connections with the communities on Pulau Ubin and share their cultures and kampung life with more Singaporeans. We'll be releasing content on a regular basis, and we sincerely hope that more Singaporeans will come to appreciate the cultural significance of Pulau Ubin.";
-
   return {
-    props: { allPosts, missionText },
+    props: { missionText },
   };
 };
