@@ -1,8 +1,8 @@
 import React from 'react';
 
 type Props = {
-  name: String;
-  title: String;
+  name: string;
+  title: string;
   position: 'left' | 'right';
 };
 
