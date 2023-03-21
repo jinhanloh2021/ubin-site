@@ -1,6 +1,5 @@
-import Alert from './alert';
 import Footer from './footer';
-import Meta from './meta';
+import Navbar from './navbar';
 
 type Props = {
   children: React.ReactNode;
@@ -9,9 +8,8 @@ type Props = {
 const Layout = ({ children }: Props) => {
   return (
     <>
-      <div className='min-h-screen'>
-        <main>{children}</main>
-      </div>
+      <Navbar />
+      <main className='min-h-screen'>{children}</main>
       <Footer />
     </>
   );
