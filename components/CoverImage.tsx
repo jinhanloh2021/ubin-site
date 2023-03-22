@@ -21,6 +21,7 @@ const CoverImage = ({ src, height, alt }: Props) => {
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'top',
         }}
+        priority
       />
     </div>
   );

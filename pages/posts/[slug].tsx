@@ -1,15 +1,18 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { getPost, getSlugs } from '../../lib/posts';
 import PostType from '../../interfaces/PostType';
 import CoverImage from '../../components/CoverImage';
 import styles from './markdown-styles.module.scss';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 
 type Props = {
   post: PostType;
 };
 
 export default function Post({ post: { slug, metadata, body } }: Props) {
+  const router = useRouter();
   console.log('Slug: ', slug);
   console.log('Metadata: ', metadata);
   return (
@@ -24,8 +27,18 @@ export default function Post({ post: { slug, metadata, body } }: Props) {
           height='30'
         />
       )}
-      <div className='px-[25%] pt-24 bg-bg_paper text-left'>
-        <h1 className='text-6xl mb-0 leading-[3rem] font-body font-medium'>
+      <div className='px-[25%] pt-12 bg-bg_paper text-left'>
+        <div className='flex justify-start align-middle gap-1 top-32 left-64 w-fit p-0 mb-8 -ml-16 hover:underline hover:cursor-pointer'>
+          <Image
+            src={'/assets/SVGs/BackIcon.svg'}
+            alt='left arrow'
+            width={20}
+            height={20}
+            priority
+          />
+          <span onClick={() => router.back()}>Go back</span>
+        </div>
+        <h1 className='text-6xl text-offBlack mb-0 leading-[3rem] font-body font-medium'>
           {metadata.title}
         </h1>
         <div className='flex flex-row justify-start align-baseline gap-2 mb-8 mt-[1.125rem] font-body text-bodySecondary text-lg'>
