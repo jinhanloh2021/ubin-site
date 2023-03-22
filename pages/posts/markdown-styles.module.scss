@@ -1,0 +1,67 @@
+.markdown {
+  @apply text-xl font-body;
+}
+
+.markdown p {
+  @apply text-inherit leading-8 indent-16;
+}
+
+.markdown ul {
+  @apply list-disc;
+  ol,
+  ul {
+    @apply ml-12;
+  }
+  ul {
+    @apply list-[circle];
+  }
+}
+
+.markdown li p {
+  @apply indent-0;
+}
+
+.markdown ol {
+  @apply list-decimal;
+  ol,
+  ul {
+    @apply ml-12;
+  }
+}
+
+.markdown a {
+  @apply no-underline text-blue-600 hover:text-blue-900 hover:underline;
+}
+
+.markdown hr {
+  @apply border-t border-[#CCCCCC] border-solid;
+}
+
+.markdown blockquote {
+  @apply text-center text-2xl italic my-8;
+  p {
+    @apply indent-0 px-16;
+    &:first-of-type {
+      @apply mb-4;
+      &::before {
+        @apply content-['“'];
+      }
+      &::after {
+        @apply content-['”'];
+      }
+    }
+  }
+}
+
+.markdown code {
+  @apply text-base;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  @apply text-3xl mt-16 mb-5 leading-[3rem];
+}

@@ -6,11 +6,13 @@ import PostType, { MDMetadata } from '../interfaces/PostType';
 // Used in getStaticProps. Server side.
 export const getPost = async (slug: string): Promise<PostType> => {
   const source = await readFile(`content/_posts/${slug}.md`, 'utf8');
-  const {
+  let {
     data: { date, title, author, excerpt, videoURL, coverImage, altText }, //markdown metadata
     content,
   } = matter(source);
   const body = marked(content);
+  coverImage = coverImage || 'forest_default_cover.jpg';
+  altText = altText || 'rainforest in fog';
   const metadata: MDMetadata = {
     date,
     title,

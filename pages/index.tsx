@@ -16,7 +16,7 @@ export default function Home({ missionText }: Props) {
       <Head>
         <title>{`Ubin Kakis`}</title>
       </Head>
-      <main className='font-display bg-bg_paper min-h-screen'>
+      <main className='font-display min-h-screen'>
         <section id='Landing img' className={`h-[100vh]`}>
           <CoverImage
             src='BicycleRental1.png'

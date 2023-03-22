@@ -1,5 +1,5 @@
 ---
-date: "2023-01-13"
+date: "13-01-2023"
 title: "Second Post Title"
 author: "Andy"
 excerpt: "The exploration of the ethics of generative language models and artificial intelligence in today's society."
