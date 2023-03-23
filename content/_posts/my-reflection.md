@@ -4,7 +4,7 @@ title: "My Reflection"
 author: "Jeannie"
 excerpt: "The exploration of the ethics of generative language models and artificial intelligence in today's society."
 videoURL: ""
-coverImage: "DouDouandLeLe.png"
+coverImage: "BoatAtJetty.png"
 altText: ""
 ---
 

@@ -8,13 +8,14 @@ import PostPreview from '../components/post-preview';
 import { getAllPosts, getPost } from '../lib/posts';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import LandingTitle from '../components/landing-title';
 
 type Props = {
   missionText: string;
   post: PostType;
 };
 
-export default function Home({ missionText, post }: Props) {
+export default function HomePage({ missionText, post }: Props) {
   const router = useRouter();
   return (
     <>
@@ -29,9 +30,7 @@ export default function Home({ missionText, post }: Props) {
             alt='Image of 45C bicycle rental shop on Pulau Ubin'
             height='100vh'
           />
-          <h1 className='absolute text-center left-0 right-0 m-auto top-[30%] font-script lg:text-9xl md:text-7xl text-5xl text-black/80 select-none drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)]'>
-            Ubin Kakis
-          </h1>
+          <LandingTitle>Ubin Kakis</LandingTitle>
         </section>
         <section id='About Us'>
           <h3 className='mt-24 mb-8 text-center font-body text-5xl font-semibold'>

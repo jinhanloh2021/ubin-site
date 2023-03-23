@@ -3,23 +3,28 @@ import React from 'react';
 type Props = {
   name: string;
   title: string;
-  position: 'left' | 'right';
+  position?: 'left' | 'right' | 'center';
 };
 
-export default function AuthorTag({ name, title, position }: Props) {
-  const isLeft = position === 'left';
+export default function AuthorTag({ name, title, position = 'center' }: Props) {
   return (
     <div
-      className={`flex flex-col font-body w-fit ${
-        isLeft ? 'justify-start text-left' : 'justify-end text-right'
+      className={`mx-auto flex flex-col font-body w-fit text-center ${
+        position === 'left'
+          ? 'justify-start lg:text-left'
+          : position === 'center'
+          ? 'justify-center lg:text-center'
+          : 'justify-end lg:text-right'
       }`}
     >
-      <h6 className='text-[2rem] font-medium'>
-        {isLeft && <Dash />}
+      <h6 className='lg:text-[2rem] text-2xl font-medium'>
+        {(position === 'left' || position === 'center') && <Dash />}
         {name}
-        {!isLeft && <Dash />}
+        {position === 'right' && <Dash />}
       </h6>
-      <p className='text-base text-bodySecondary font-body'>{title}</p>
+      <p className={`lg:text-base text-base text-bodySecondary font-body`}>
+        {title}
+      </p>
     </div>
   );
 }
