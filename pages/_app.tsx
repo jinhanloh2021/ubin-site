@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-import '../styles/index.css';
+import '../styles/index.scss';
 import Footer from '../components/footer';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
