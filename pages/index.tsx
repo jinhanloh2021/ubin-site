@@ -32,12 +32,18 @@ export default function HomePage({ missionText, post }: Props) {
           />
           <LandingTitle>Ubin Kakis</LandingTitle>
         </section>
-        <section id='About Us'>
-          <h3 className='mt-24 mb-8 text-center font-body text-5xl font-semibold'>
+        <section id='About Us' className='mt-24 mb-24 relative'>
+          <h3 className='mb-8 text-center font-body text-5xl font-semibold'>
             Our Project
           </h3>
-          <div className='bg-[url(/assets/Images/UbinKakisLogo.png)] h-[29.5rem] bg-center bg-no-repeat' />
-          <div className='flex flex-col justify-center items-center'>
+          <Image
+            className='h-[30%] w-[30%] m-auto object-fit'
+            src='/assets/Images/UbinKakisLogo.png'
+            alt='Logo'
+            height={1000}
+            width={1000}
+          />
+          <div className='flex flex-col justify-center items-center mb-24'>
             <p className='my-8 text-center font-body text-2xl leading-9 mx-[30%]'>
               {missionText}
             </p>
@@ -47,8 +53,10 @@ export default function HomePage({ missionText, post }: Props) {
               title={'Project Leader'}
             />
           </div>
-          <div
-            className={`bg-[url(/assets/Images/DouDouAndLeLe.png)] h-[60vh] bg-cover bg-no-repeat bg-center my-16`}
+          <CoverImage
+            src={'DouDouandLeLe.png'}
+            alt='Two dogs dou dou and le le looking in the distance'
+            height='60vh'
           />
         </section>
         <section id='journal'>
