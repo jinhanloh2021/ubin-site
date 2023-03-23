@@ -29,8 +29,9 @@ export default function Posts({ posts }: Props) {
           </h1>
         </section>
         <section id='post-list'>
-          <PostPreview post={posts[0]} />
-          <PostPreview post={posts[1]} />
+          {posts.map((post) => {
+            return <PostPreview post={post} />;
+          })}
         </section>
       </main>
     </>

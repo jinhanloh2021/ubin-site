@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 type Props = {
   post: PostType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export default function PostPreview({ post, children }: Props) {
