@@ -1,11 +1,19 @@
 import Image from 'next/image';
+import TelegramForm from './telegram-form';
 
 const Footer = () => {
   return (
     <footer className='border-t border-[#CCCCCC] min-h-fit lg:mx-[16%] md:mx-[8%] mx-0 bg-bg_paper'>
       <div className='mx-auto container'>
-        <h4 className='text-base text-center my-8 font-semibold'>Contact Us</h4>
-        <div className='flex flex-row justify-center align-middle gap-16 lg:mb-12 mb-8'>
+        <h3 className='text-center lg:text-6xl text-3xl text-offBlack lg:pb-[1.125rem] pb-2 leading-[3rem] font-medium font-body xl:mx-[24%] lg:mx-[20%] mx-[8%] lg:mt-24 mt-16'>
+          Contact Us
+        </h3>
+        <h4 className='text-base text-center mt-4 mb-8 lg:text-lg md:mx-auto xl:max-w-[30vw] lg:max-w-[40vw] md:max-w-[50vw] mx-[8%]'>
+          Have a question, feedback or story to share? Get in touch with us
+          below.
+        </h4>
+        <TelegramForm />
+        <div className='flex flex-row justify-center align-middle lg:gap-16 gap-10 lg:mb-12 lg:mt-16 mb-8 mt-12'>
           <a href='https://www.instagram.com/ubinkakis/'>
             <Image
               priority
@@ -33,7 +41,7 @@ const Footer = () => {
               height={32}
             />
           </a>
-          <a href='https://smu.edu.sg'>
+          <a href='mailto:smuprojectubinkakis@gmail.com'>
             <Image
               priority
               src={'/assets/SVGs/email.svg'}
