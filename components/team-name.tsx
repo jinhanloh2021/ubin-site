@@ -4,7 +4,7 @@ type Props = {
 
 export default function TeamName({ children }: Props) {
   return (
-    <h2 className='lg:mx-[20%] lg:text-[3rem] font-script text-5xl text-center py-3 border-b border-[#CCCCCC] mx-8'>
+    <h2 className='md:mx-[20%] lg:text-[3rem] font-script text-5xl text-center py-3 border-b border-[#CCCCCC] mx-8'>
       {children}
     </h2>
   );

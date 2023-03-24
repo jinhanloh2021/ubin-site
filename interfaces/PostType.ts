@@ -1,5 +1,5 @@
 type PostType = {
-  slug?: string;
+  slug: string;
   metadata: MDMetadata;
   body: string;
 };

@@ -2,25 +2,19 @@ import Image from 'next/image';
 
 type Props = {
   src: string;
-  height: string; //in vh
+  height: string;
   alt: string;
 };
 
 const CoverImage = ({ src, height, alt }: Props) => {
   return (
-    <div
-      className={`overflow-hidden relative select-none`}
-      style={{ height: `${height}` }} //workaround for dynamic classname issue
-    >
+    <div className='relative' style={{ height: `${height}` }}>
       <Image
         src={`/assets/Images/${src}`}
         alt={alt}
         fill
-        style={{
-          objectFit: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'top',
-        }}
+        sizes='100%'
+        className='object-cover bg-no-repeat bg-top overflow-hidden select-none'
         priority
       />
     </div>

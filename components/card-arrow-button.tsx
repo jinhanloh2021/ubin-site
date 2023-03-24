@@ -48,7 +48,7 @@ const Arrow = ({ direction }: ArrowProps) => {
       alt={`${direction} arrow`}
       width={20}
       height={20}
-      className={`${
+      className={`w-[20px] h-[20px] ${
         direction === 'right' ? 'scale-[-1] translate-y-[4px]' : ''
       }`}
     />

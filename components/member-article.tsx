@@ -13,7 +13,7 @@ export default function MemberArticle({ member, align }: Props) {
   const { width, height } = useWindowSize();
   const isMobile = width < 1024;
   return (
-    <article className='py-8 px-[10%] lg:px-[24%] flex flex-col lg:flex-row justify-between gap-6 lg:gap-8 align-middle'>
+    <article className='py-8 lg:px-[24%] md:px-[18%] px-[10%] flex flex-col lg:flex-row justify-between gap-6 lg:gap-8 align-middle'>
       {(align === 'left' && !isMobile) || (
         <MemberImg src={member.photo} alt={member.alt} />
       )}

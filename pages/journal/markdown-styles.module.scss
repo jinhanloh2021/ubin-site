@@ -1,0 +1,71 @@
+.markdown {
+  @apply lg:text-xl text-[1.125rem] font-body lg:mb-16 mb-10;
+}
+
+.markdown p {
+  @apply lg:leading-8 leading-7 lg:indent-16 indent-8;
+}
+
+.markdown ul {
+  @apply list-disc list-inside;
+  ol,
+  ul {
+    @apply lg:ml-12 ml-6;
+  }
+  ul {
+    @apply list-[circle];
+  }
+}
+
+.markdown li p {
+  @apply indent-0;
+}
+
+.markdown ol {
+  @apply list-decimal list-inside;
+  ol,
+  ul {
+    @apply lg:ml-12 ml-6;
+  }
+}
+
+.markdown a {
+  @apply lg:no-underline text-blue-600 hover:text-blue-900 lg:hover:underline underline;
+}
+
+.markdown hr {
+  @apply border-t border-[#CCCCCC] border-solid;
+}
+
+.markdown blockquote {
+  @apply text-center lg:text-2xl text-xl italic lg:my-8 my-4;
+  p {
+    @apply indent-0 lg:px-16 px-8;
+    &:first-of-type {
+      @apply mb-4;
+      &::before {
+        @apply content-['“'];
+      }
+      &::after {
+        @apply content-['”'];
+      }
+    }
+  }
+}
+
+.markdown code {
+  @apply lg:text-base text-sm;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  @apply lg:text-3xl text-[1.625rem] lg:mt-16 mt-8 lg:mb-5 mb-3 lg:leading-[3rem] text-offBlack;
+}
+
+.markdown img {
+  @apply lg:min-h-[50vh] min-h-[30vh] object-cover bg-no-repeat bg-center overflow-hidden select-none lg:my-8 my-4;
+}

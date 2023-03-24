@@ -1,32 +1,20 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { getPost, getSlugs } from '../../lib/posts';
 import PostType from '../../interfaces/PostType';
 import CoverImage from '../../components/cover-image';
 import styles from './markdown-styles.module.scss';
-import { useRouter } from 'next/router';
 import PostDetails from '../../components/post-details';
-import { useEffect } from 'react';
 import CardArrowButton from '../../components/card-arrow-button';
 
 type Props = {
   post: PostType;
 };
 
-export default function Post({ post: { slug, metadata, body } }: Props) {
-  const router = useRouter();
-  useEffect(() => {
-    router.beforePopState((state) => {
-      state.options.scroll = false;
-      return true;
-    });
-  }, []);
-  console.log('Slug: ', slug);
-  console.log('Metadata: ', metadata);
+export default function Journal({ post: { slug, metadata, body } }: Props) {
   return (
     <>
       <Head>
-        <title>Ubin Kakis</title>
+        <title>Journal - {slug}</title>
       </Head>
       {!metadata.coverImage || (
         <CoverImage
@@ -35,11 +23,11 @@ export default function Post({ post: { slug, metadata, body } }: Props) {
           height='30vh'
         />
       )}
-      <div className='px-[25%] pt-12 bg-bg_paper text-left font-body'>
+      <div className='lg:px-[24%] px-[8%] lg:pt-12 pt-8 bg-bg_paper text-left font-body'>
         <CardArrowButton url='back' direction='left' justify='start'>
           Go Back
         </CardArrowButton>
-        <h1 className='text-6xl text-offBlack mb-0 leading-[3rem] font-medium'>
+        <h1 className='lg:text-6xl text-3xl mt-4 text-offBlack mb-0 leading-[3rem] font-medium'>
           {metadata.title}
         </h1>
         <PostDetails author={metadata.author} date={metadata.date} />
@@ -54,7 +42,6 @@ export default function Post({ post: { slug, metadata, body } }: Props) {
 
 export async function getStaticPaths() {
   const slugs = await getSlugs(); //loops through posts and get filenames
-  console.log('[Slugs]: ', slugs);
   return {
     paths: slugs.map((slug) => ({
       params: { slug },
@@ -64,7 +51,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  console.log('[Props]: ', slug);
   const post: PostType = await getPost(slug); //get post object from pathname (filename)
   return {
     props: { post },

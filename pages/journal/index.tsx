@@ -10,8 +10,7 @@ type Props = {
   posts: PostType[];
 };
 
-export default function PostPage({ posts }: Props) {
-  console.log('Posts: ', posts);
+export default function JournalPage({ posts }: Props) {
   return (
     <>
       <Navbar />
@@ -28,8 +27,8 @@ export default function PostPage({ posts }: Props) {
           <LandingTitle>Journal</LandingTitle>
         </section>
         <section id='post-list'>
-          {posts.map((post) => {
-            return <PostPreview post={post} />;
+          {posts.map((post, index) => {
+            return <PostPreview post={post} key={index} />;
           })}
         </section>
       </main>
@@ -38,7 +37,6 @@ export default function PostPage({ posts }: Props) {
 }
 
 export async function getStaticProps() {
-  console.log('[Props]');
   const posts: PostType[] = await getAllPosts(); //get post object from pathname (filename)
   return {
     props: { posts },
