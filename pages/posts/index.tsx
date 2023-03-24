@@ -19,7 +19,7 @@ export default function PostPage({ posts }: Props) {
         <title>{`Ubin Kakis - Journal`}</title>
       </Head>
       <main className='min-h-screen'>
-        <section id='journal-landing-img' className={`h-[100vh]`}>
+        <section id='journal-landing-img' className={`h-[100vh] mb-16`}>
           <CoverImage
             src='BoatAtJetty.png'
             height='100vh'

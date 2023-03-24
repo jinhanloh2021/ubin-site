@@ -7,6 +7,7 @@ import styles from './markdown-styles.module.scss';
 import { useRouter } from 'next/router';
 import PostDetails from '../../components/post-details';
 import { useEffect } from 'react';
+import CardArrowButton from '../../components/card-arrow-button';
 
 type Props = {
   post: PostType;
@@ -35,18 +36,9 @@ export default function Post({ post: { slug, metadata, body } }: Props) {
         />
       )}
       <div className='px-[25%] pt-12 bg-bg_paper text-left font-body'>
-        <div className='flex justify-start align-baseline gap-1 top-32 left-64 w-fit p-0 mb-8 -ml-16 hover:underline hover:cursor-pointer font-display'>
-          <Image
-            src={'/assets/SVGs/BackIcon.svg'}
-            alt='left arrow'
-            width={20}
-            height={20}
-            priority
-          />
-          <span className='relative top-[1.5px]' onClick={() => router.back()}>
-            Go back
-          </span>
-        </div>
+        <CardArrowButton url='back' direction='left' justify='start'>
+          Go Back
+        </CardArrowButton>
         <h1 className='text-6xl text-offBlack mb-0 leading-[3rem] font-medium'>
           {metadata.title}
         </h1>

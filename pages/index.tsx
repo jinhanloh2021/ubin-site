@@ -10,6 +10,7 @@ import Navbar from '../components/navbar';
 import CoverImage from '../components/cover-image';
 import PostPreview from '../components/post-preview';
 import LandingTitle from '../components/landing-title';
+import CardArrowButton from '../components/card-arrow-button';
 
 type Props = {
   missionText: string;
@@ -39,18 +40,18 @@ export default function HomePage({ missionText, post }: Props) {
           id='About Us'
           className='lg:mt-24 lg:mb-24 mt-16 mb-16 relative'
         >
-          <h3 className='mb-8 text-center font-body text-5xl font-semibold'>
+          <h1 className='mb-8 text-center font-body text-5xl font-semibold'>
             Our Project
-          </h3>
+          </h1>
           <Image
-            className='lg:h-[30%] lg:w-[30%] h-[80%] w-[80%] m-auto object-fit'
+            className='lg:h-[30%] lg:w-[30%] sm:h-[50%] sm:w-[50%] h-[80%] w-[80%] m-auto object-fit'
             src='/assets/Images/UbinKakisLogo.png'
             alt='Logo'
             height={1000}
             width={1000}
           />
           <div className='flex flex-col justify-center items-center lg:mb-24 mb-20'>
-            <p className='lg:my-8 my-6 text-center font-body lg:text-2xl text-lg lg:leading-9 leading-6 lg:mx-[30%] mx-[10%]'>
+            <p className='lg:my-8 my-6 text-center font-body lg:text-[1.25rem] text-lg lg:leading-9 leading-6 lg:mx-[30%] mx-[10%]'>
               {missionText}
             </p>
             <AuthorTag
@@ -62,43 +63,26 @@ export default function HomePage({ missionText, post }: Props) {
           <CoverImage
             src={'DouDouandLeLe.png'}
             alt='Two dogs dou dou and le le looking in the distance'
-            height='60vh'
+            height={isMobile ? '30vh' : '60vh'}
           />
         </section>
         <section id='journal'>
-          <h1
-            className={`text-6xl text-offBlack pb-[1.125rem] leading-[3rem] font-medium font-body mx-[20%] border-b border-[#CCCCCC] border-solid`}
-          >
+          <h1 className='lg:text-6xl text-3xl text-offBlack lg:pb-[1.125rem] pb-[4] leading-[3rem] font-medium font-body xl:mx-[24%] lg:mx-[20%] mx-[8%] border-b border-[#CCCCCC] border-solid'>
             Journal
           </h1>
           <PostPreview post={post}>
-            <div className='flex justify-end align-baseline gap-1 p-0 mb-8 -ml-16 hover:underline hover:cursor-pointer font-display'>
-              <span
-                className='relative top-[1.5px]'
-                onClick={() => router.push('/posts')}
-              >
-                Explore Journal
-              </span>
-              <Image
-                src={'/assets/SVGs/BackIcon.svg'}
-                alt='left arrow'
-                width={20}
-                height={20}
-                priority
-                className='scale-[-1] translate-y-[3px]'
-              />
-            </div>
+            <CardArrowButton url='/posts' direction='right' justify='end'>
+              Explore Journal
+            </CardArrowButton>
           </PostPreview>
         </section>
         <section id='team'>
-          <h1
-            className={`text-6xl text-offBlack pb-[1.125rem] leading-[3rem] font-medium font-body mx-[20%] border-b border-[#CCCCCC] border-solid mt-16`}
-          >
+          <h1 className='lg:text-6xl text-3xl text-offBlack lg:pb-[1.125rem] pb-[4] leading-[3rem] font-medium font-body xl:mx-[24%] lg:mx-[20%] mx-[8%] border-b border-[#CCCCCC] border-solid lg:mt-24 mt-16'>
             Our Team
           </h1>
-          <article className='mx-[20%] mt-16 border-b border-[#CCCCCC] border-solid mb-8 font-body last:border-none'>
-            <div className='rounded-[1.125rem] overflow-hidden select-none cursor-pointer'>
-              <Link href={`/about`}>
+          <article className='xl:mx-[24%] lg:mx-[20%] mx-[8%] lg:mt-16 mt-4 border-b border-[#CCCCCC] border-solid mb-8 font-body last:border-none'>
+            <div className='lg:rounded-[1.125rem] rounded-[1rem] overflow-hidden select-none cursor-pointer'>
+              <Link href={`/team`}>
                 <CoverImage
                   src={'TeamPicHome.png'}
                   alt='Ubin Kakis team smiling at the camera'
@@ -106,27 +90,14 @@ export default function HomePage({ missionText, post }: Props) {
                 />
               </Link>
             </div>
-            <p className='text-xl leading-5 text-bodySecondary my-8'>
+            <p className='lg:text-xl text-[1.125rem] leading-6 text-bodySecondary my-8'>
               {
                 "We are a group of SMU students deeply passionate about culture and community, and we're working with Artsolute to help raise greater awareness and interest in the cultural heritage of Pulau Ubin."
               }
             </p>
-            <div className='flex justify-end align-baseline gap-1 p-0 mb-8 -ml-16 hover:underline hover:cursor-pointer font-display'>
-              <span
-                className='relative top-[1.5px]'
-                onClick={() => router.push('/about')}
-              >
-                Find Out More
-              </span>
-              <Image
-                src={'/assets/SVGs/BackIcon.svg'}
-                alt='left arrow'
-                width={20}
-                height={20}
-                priority
-                className='scale-[-1] translate-y-[3px]'
-              />
-            </div>
+            <CardArrowButton url='/team' direction='right' justify='end'>
+              Find Out More
+            </CardArrowButton>
           </article>
         </section>
       </main>

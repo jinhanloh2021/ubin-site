@@ -13,18 +13,18 @@ type Props = {
 export default function PostPreview({ post, children }: Props) {
   const slug: string = post.slug ?? '';
   return (
-    <article className='mx-[20%] mt-16 border-b border-[#CCCCCC] border-solid mb-8 font-body last:border-none'>
-      <div className='rounded-[1.125rem] overflow-hidden select-none cursor-pointer'>
+    <article className='xl:mx-[24%] lg:mx-[20%] mx-[8%] lg:mt-16 mt-4 border-b border-[#CCCCCC] border-solid mb-8 font-body last:border-none'>
+      <div className='lg:rounded-[1.125rem] rounded-[1rem] overflow-hidden select-none cursor-pointer'>
         <Link href={`/posts/${slug}`}>
           <CoverImage src={post.metadata.coverImage} alt='' height='30rem' />
         </Link>
       </div>
       <Link href={`/posts/${slug}`}>
-        <h1 className='inline-block text-6xl mt-8 mb-3 leading-[3rem] font-medium text-offBlack hover:underline cursor-pointer'>
+        <h1 className='inline-block lg:text-6xl text-3xl lg:mt-8 mt-4 lg:mb-3 mb-2 leading-[3rem] font-medium text-offBlack hover:underline cursor-pointer'>
           {post.metadata.title}
         </h1>
       </Link>
-      <p className='text-xl leading-5 text-bodySecondary'>
+      <p className='lg:text-xl text-[1.125rem] leading-6 text-bodySecondary'>
         {post.metadata.excerpt}
       </p>
       <PostDetails author={post.metadata.author} date={post.metadata.date} />

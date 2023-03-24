@@ -49,11 +49,6 @@ Here's some ***bold and italicised*** text. Aliquip pariatur nulla ullamco non p
 
 &nbsp;
 
-    This is a code block. Create it by indenting 4 spaces.
-    More code in code block.
-
-&nbsp;
-
 ### Here's an image
 
 ![Dou Dou and Le Le](/assets/Images/DouDouandLeLe.png)

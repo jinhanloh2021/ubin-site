@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className='border-t border-[#CCCCCC] min-h-fit lg:mx-[16%] md:mx-4 mx-1 bg-bg_paper'>
+    <footer className='border-t border-[#CCCCCC] min-h-fit lg:mx-[16%] md:mx-4 mx-0 bg-bg_paper'>
       <div className='mx-auto container'>
         <h4 className='text-base text-center my-8 font-semibold'>Contact Us</h4>
         <div className='flex flex-row justify-center align-middle gap-16 lg:mb-4 mb-8'>
