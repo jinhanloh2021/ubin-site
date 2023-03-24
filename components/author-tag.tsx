@@ -9,7 +9,7 @@ type Props = {
 export default function AuthorTag({ name, title, position = 'center' }: Props) {
   return (
     <div
-      className={`mx-auto flex flex-col font-body w-fit text-center ${
+      className={`mx-auto flex flex-col font-body w-fit text-center gap-1 ${
         position === 'left'
           ? 'justify-start lg:text-left'
           : position === 'center'

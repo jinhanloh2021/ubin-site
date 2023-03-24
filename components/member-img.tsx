@@ -13,7 +13,8 @@ export default function MemberImg({ src, alt }: Props) {
         src={`/assets/Images/${src}`}
         alt={alt}
         fill
-        className='object-cover bg-no-repeat bg-center overflow-hidden select-none rounded-[1.125rem]'
+        sizes='100%'
+        className=' object-cover bg-no-repeat bg-center overflow-hidden select-none rounded-[1.125rem]'
         priority
       />
     </div>

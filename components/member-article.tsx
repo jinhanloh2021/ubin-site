@@ -10,26 +10,36 @@ type Props = {
 };
 
 export default function MemberArticle({ member, align }: Props) {
-  const { width, height } = useWindowSize();
-  const isMobile = width < 1024;
+  const { width } = useWindowSize();
+  const isMobile = width < 1280;
+  align = isMobile ? 'left' : align;
+
+  const renderMemberImg = () => (
+    <MemberImg src={member.photo} alt={member.alt} />
+  );
+
+  const renderAuthorTag = () => (
+    <AuthorTag name={member.name} title={member.position} position={align} />
+  );
+
+  const renderStatement = () => (
+    <p
+      className={`font-body lg:text-xl text-lg leading-[1.75rem] px-3 text-center ${
+        align === 'left' ? 'lg:text-left' : 'lg:text-right'
+      }`}
+    >
+      {member.statement}
+    </p>
+  );
+
   return (
-    <article className='py-8 lg:px-[24%] md:px-[18%] px-[10%] flex flex-col lg:flex-row justify-between gap-6 lg:gap-8 align-middle'>
-      {(align === 'left' && !isMobile) || (
-        <MemberImg src={member.photo} alt={member.alt} />
-      )}
+    <article className='lg:py-16 py-12 lg:px-[24%] md:px-[18%] px-[10%] flex flex-col xl:flex-row justify-between gap-6 lg:gap-8 align-middle'>
+      {align === 'left' && !isMobile && renderMemberImg()}
       <div className='flex flex-col justify-center gap-8'>
-        <p
-          className={`font-body text-base px-3 leading-6 text-center ${
-            align === 'left' ? 'lg:text-left' : 'lg:text-right'
-          }`}
-        >
-          {member.statement}
-        </p>
-        <AuthorTag name={member.name} title={member.position} />
+        {renderStatement()}
+        {renderAuthorTag()}
       </div>
-      {!(align === 'left') || isMobile || (
-        <MemberImg src={member.photo} alt={member.alt} />
-      )}
+      {!(align === 'left') && !isMobile && renderMemberImg()}
     </article>
   );
 }

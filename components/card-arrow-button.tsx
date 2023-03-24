@@ -23,11 +23,11 @@ export default function CardArrowButton({
     <div
       className={`flex ${
         'justify-' + justify
-      } align-baseline gap-1 p-0 lg:mb-8 hover:underline hover:cursor-pointer`}
+      } align-baseline gap-1 p-0 lg:mb-8`}
     >
       {direction === 'left' && <Arrow direction='left' />}
       <span
-        className='relative font-display top-[1.5px] lg:text-base text-sm'
+        className='relative font-display top-[1.5px] lg:text-base text-sm hover:underline hover:cursor-pointer'
         onClick={routeFn}
       >
         {children}

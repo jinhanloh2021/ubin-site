@@ -60,6 +60,24 @@ export const members: MemberType[] = [
       'Spread the word about the secrets of Pulau Ubin and encourage more people to spend more time outside the city and appreciate our last few real kampungs.',
     alt: 'Victoria sitting on a bum boat posing for the camera',
   },
+  {
+    name: 'Jeannie',
+    position: 'Graphic Designer',
+    team: 'Socials',
+    photo: 'jeannie.png',
+    statement:
+      "I hope to preserve the stories of Pulau Ubin and spread it to others. I also hope to grow and learn useful things that can contribute to my skill and life from my team and the residence. It's a whole new perspective that I'm excited to discover.",
+    alt: "Jeannie smiling and posing for the camera standing in front of a old house. She's wearing a beret and a white jacket.",
+  },
+  {
+    name: 'Jin Han',
+    position: 'Web Developer',
+    team: 'Socials',
+    photo: 'jin-han.png',
+    statement:
+      'I hope to get more people interested in Pulau Ubin and its people. I think that there is a lot that Singaporeans can learn from the Pulau Ubin, such as their culture and their way of life. Connecting with the residents grounds me and reminds me of the importance of relationships and communication. Especially now that we are so digitised and connected virtually, the honest relationships with them feel invaluable.',
+    alt: 'Jin Han holding a cat in his left right arm and smiling at the camera. He is wearing a cap and a white shirt. He is standing in front of the Tua Pek Kong temple.',
+  },
 ];
 
 export const team: string[] = ['Committee', 'Interview', 'Socials'];

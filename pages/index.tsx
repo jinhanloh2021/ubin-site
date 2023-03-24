@@ -71,7 +71,7 @@ export default function HomePage({ missionText, post }: Props) {
             Journal
           </h1>
           <PostPreview post={post}>
-            <CardArrowButton url='/posts' direction='right' justify='end'>
+            <CardArrowButton url='/journal' direction='right' justify='end'>
               Explore Journal
             </CardArrowButton>
           </PostPreview>

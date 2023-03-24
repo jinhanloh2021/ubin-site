@@ -47,11 +47,14 @@ export default function TeamPage({ memberList }: Props) {
           <TeamName>{`${team[1]} Team`}</TeamName>
           <MemberArticle member={memberList[1]} align='left' />
           <MemberArticle member={memberList[2]} align='right' />
+          <MemberArticle member={memberList[3]} align='left' />
+          <MemberArticle member={memberList[4]} align='right' />
         </section>
         <section id={team[2]} className='mt-8'>
           <TeamName>{`${team[2]} Team`}</TeamName>
-          <MemberArticle member={memberList[3]} align='left' />
-          <MemberArticle member={memberList[4]} align='right' />
+          <MemberArticle member={memberList[5]} align='left' />
+          <MemberArticle member={memberList[6]} align='right' />
+          <MemberArticle member={memberList[7]} align='left' />
         </section>
       </main>
     </>
