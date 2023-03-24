@@ -14,7 +14,7 @@ export default function Journal({ post: { slug, metadata, body } }: Props) {
   return (
     <>
       <Head>
-        <title>Journal - {slug}</title>
+        <title>{`Journal - ${slug}`}</title>
       </Head>
       {!metadata.coverImage || (
         <CoverImage
