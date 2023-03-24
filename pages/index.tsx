@@ -1,13 +1,14 @@
 import Head from 'next/head';
-import AuthorTag from '../components/author-tag';
-import Navbar from '../components/navbar';
-import PostType, { MDMetadata } from '../interfaces/PostType';
 import Image from 'next/image';
-import CoverImage from '../components/cover-image';
-import PostPreview from '../components/post-preview';
-import { getAllPosts, getPost } from '../lib/posts';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import PostType from '../interfaces/PostType';
+import { getAllPosts } from '../lib/posts';
+import useWindowSize from '../hooks/useWindowSize';
+import AuthorTag from '../components/author-tag';
+import Navbar from '../components/navbar';
+import CoverImage from '../components/cover-image';
+import PostPreview from '../components/post-preview';
 import LandingTitle from '../components/landing-title';
 
 type Props = {
@@ -17,6 +18,8 @@ type Props = {
 
 export default function HomePage({ missionText, post }: Props) {
   const router = useRouter();
+  const { width, height } = useWindowSize();
+  const isMobile = width < 1024;
   return (
     <>
       <Navbar />
@@ -32,19 +35,22 @@ export default function HomePage({ missionText, post }: Props) {
           />
           <LandingTitle>Ubin Kakis</LandingTitle>
         </section>
-        <section id='About Us' className='mt-24 mb-24 relative'>
+        <section
+          id='About Us'
+          className='lg:mt-24 lg:mb-24 mt-16 mb-16 relative'
+        >
           <h3 className='mb-8 text-center font-body text-5xl font-semibold'>
             Our Project
           </h3>
           <Image
-            className='h-[30%] w-[30%] m-auto object-fit'
+            className='lg:h-[30%] lg:w-[30%] h-[80%] w-[80%] m-auto object-fit'
             src='/assets/Images/UbinKakisLogo.png'
             alt='Logo'
             height={1000}
             width={1000}
           />
-          <div className='flex flex-col justify-center items-center mb-24'>
-            <p className='my-8 text-center font-body text-2xl leading-9 mx-[30%]'>
+          <div className='flex flex-col justify-center items-center lg:mb-24 mb-20'>
+            <p className='lg:my-8 my-6 text-center font-body lg:text-2xl text-lg lg:leading-9 leading-6 lg:mx-[30%] mx-[10%]'>
               {missionText}
             </p>
             <AuthorTag
