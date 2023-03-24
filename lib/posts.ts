@@ -22,7 +22,7 @@ export const getPost = async (slug: string): Promise<PostType> => {
     coverImage,
     altText,
   };
-  return { metadata, body };
+  return { slug, metadata, body };
 };
 
 export const getSlugs = async (): Promise<string[]> => {
