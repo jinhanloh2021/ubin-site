@@ -1,7 +1,7 @@
 ---
 date: "21-03-2023"
-title: "Struggles of a volunteer"
-author: "Loh Jin Han"
+title: "First Post"
+author: "Administrator"
 excerpt: "The exploration of the ethics of generative language models and artificial intelligence in today's society."
 videoURL: "https://youtu.be/rEpH1V1L7fQ"
 coverImage: "GroupPicWithTerence.png"
