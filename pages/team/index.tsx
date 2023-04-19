@@ -13,14 +13,6 @@ type Props = {
 };
 
 export default function TeamPage({ memberList }: Props) {
-  const renderOrder = team.flatMap((t) =>
-    memberList
-      .filter((m) => m.team === t)
-      .map((m, i) => ({
-        member: m,
-        align: i % 2 === 0 ? 'left' : 'right',
-      }))
-  );
   return (
     <>
       <Navbar />

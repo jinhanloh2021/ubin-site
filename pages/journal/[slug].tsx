@@ -31,6 +31,16 @@ export default function Journal({ post: { slug, metadata, body } }: Props) {
           {metadata.title}
         </h1>
         <PostDetails author={metadata.author} date={metadata.date} />
+        {metadata.videoURL && (
+          <iframe
+            className='w-full md:h-[50vh] sm:h-[40vh] h-[30vh] lg:my-8 my-4 mx-auto'
+            src={metadata.videoURL}
+            title='YouTube video player'
+            allow='clipboard-write; picture-in-picture; web-share'
+            allowFullScreen
+          ></iframe>
+        )}
+
         <article
           className={styles.markdown}
           dangerouslySetInnerHTML={{ __html: body }}

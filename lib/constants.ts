@@ -80,4 +80,4 @@ export const members: MemberType[] = [
   },
 ];
 
-export const team: string[] = ['Committee', 'Interview', 'Socials'];
+export const team: string[] = ['Committee', 'Interviews', 'Socials'];
