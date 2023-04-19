@@ -3,7 +3,7 @@ date: "18-04-23"
 title: "Hello, We are Ubin Kakis!"
 author: "Ansley"
 excerpt: "It’s been about 4 months since our first team visit, and time really flies by so quickly! It’s been a time filled with nothing but curiosity, joy and gratitude."
-videoURL: "https://www.youtube.com/embed/rEpH1V1L7fQ"
+videoURL: ""
 coverImage: "yak-hong-team-cny.jpg"
 altText: "Ubin Kakis team members posing with yak hong provision shop."
 ---
