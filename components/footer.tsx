@@ -27,7 +27,11 @@ export default function Footer() {
 const SocialsIcons = () => {
   return (
     <div className='flex flex-row justify-center align-middle lg:gap-16 gap-10 lg:mb-12 lg:mt-16 mb-8 mt-12'>
-      <a href='https://www.instagram.com/ubinkakis/'>
+      <a
+        href='https://www.instagram.com/ubinkakis/'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         <Image
           src={'/assets/SVGs/instagram.svg'}
           alt='envelope'
@@ -35,7 +39,11 @@ const SocialsIcons = () => {
           height={32}
         />
       </a>
-      <a href='https://www.youtube.com'>
+      <a
+        href='https://www.youtube.com/@ProjectUbinKakis'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         <Image
           src={'/assets/SVGs/youtube.svg'}
           alt='envelope'
@@ -43,7 +51,11 @@ const SocialsIcons = () => {
           height={32}
         />
       </a>
-      <a href='mailto:smuprojectubinkakis@gmail.com'>
+      <a
+        href='mailto:smuprojectubinkakis@gmail.com'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         <Image
           src={'/assets/SVGs/email.svg'}
           alt='envelope'
