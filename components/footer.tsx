@@ -35,17 +35,9 @@ const SocialsIcons = () => {
           height={32}
         />
       </a>
-      <a href='https://www.facebook.com'>
+      <a href='https://www.youtube.com'>
         <Image
-          src={'/assets/SVGs/facebook.svg'}
-          alt='envelope'
-          width={32}
-          height={32}
-        />
-      </a>
-      <a href='https://www.linkedin.com'>
-        <Image
-          src={'/assets/SVGs/linkedin.svg'}
+          src={'/assets/SVGs/youtube.svg'}
           alt='envelope'
           width={32}
           height={32}
