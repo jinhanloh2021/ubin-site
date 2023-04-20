@@ -4,7 +4,8 @@
 
 .markdown :global {
   .post__image__caption {
-    @apply md:text-sm text-[0.75rem] lg:leading-6 leading-4 text-gray-500 font-display font-light indent-0 text-center lg:mx-24 md:mx-20 lg:mt-[-1rem] mt-[-.5rem] md:mb-4 mb-3;
+    @apply md:text-sm text-[0.75rem] lg:leading-6 leading-4 text-gray-500 font-display font-light indent-0 text-center lg:mx-[10%] md:mx-[8%] lg:mt-[-1rem] mt-[-.5rem] md:mb-4 mb-3;
+    text-wrap: balance; /*experimental*/
   }
 }
 
