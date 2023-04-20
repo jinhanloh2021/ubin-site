@@ -11,6 +11,7 @@ import CoverImage from '../components/cover-image';
 import PostPreview from '../components/post-preview';
 import LandingTitle from '../components/landing-title';
 import CardArrowButton from '../components/card-arrow-button';
+import moment from 'moment';
 
 type Props = {
   missionText: string;
@@ -109,6 +110,11 @@ export const getStaticProps = async () => {
   const missionText =
     "Our goal for this project is to form meaningful connections with the communities on Pulau Ubin and share their cultures and kampung life with more Singaporeans. We'll be releasing content on a regular basis, and we sincerely hope that more Singaporeans will come to appreciate the cultural significance of Pulau Ubin.";
   const posts: PostType[] = await getAllPosts();
+  posts.sort((a, b) => {
+    const dateA = moment(a.metadata.date, 'DD-MM-YY');
+    const dateB = moment(b.metadata.date, 'DD-MM-YY');
+    return dateB.diff(dateA);
+  });
 
   return {
     props: { missionText, post: posts[0] },

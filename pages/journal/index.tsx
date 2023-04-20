@@ -38,8 +38,8 @@ export default function JournalPage({ posts }: Props) {
 }
 
 export async function getStaticProps() {
-  let posts: PostType[] = await getAllPosts(); //get post object from pathname (filename)
-  posts = posts.sort((a, b) => {
+  const posts: PostType[] = await getAllPosts(); //get post object from pathname (filename)
+  posts.sort((a, b) => {
     const dateA = moment(a.metadata.date, 'DD-MM-YY');
     const dateB = moment(b.metadata.date, 'DD-MM-YY');
     return dateB.diff(dateA);
