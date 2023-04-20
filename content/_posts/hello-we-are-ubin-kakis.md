@@ -4,7 +4,7 @@ title: "Hello, We are Ubin Kakis!"
 author: "Ansley"
 excerpt: "It’s been about 4 months since our first team visit, and time really flies by so quickly! It’s been a time filled with nothing but curiosity, joy and gratitude."
 videoURL: ""
-coverImage: "yak-hong-team-cny.jpg"
+coverImage: "hello-we-are-ubin-kakis-cover.jpg"
 altText: "Ubin Kakis team members posing with yak hong provision shop."
 ---
 It’s been about 4 months since our first team visit, and time really flies by so quickly! My time on this CSP so far has been fruitful—it’s filled with nothing but ever-increasing curiosity, joy and gratitude.
@@ -33,6 +33,6 @@ Last month, we also had the opportunity to join a descendant, Syazwan, at his mo
 
 Indeed, time is of the essence for Ubin and the residents themselves. Many of the already few residents have moved to the mainland as they’re getting on in age and were encouraged by their children to be near accessible health facilities, but Ubin still remains so close to their hearts. Once again, I’m reminded that documentation and conversations are so important, otherwise we may really lose their precious relationships, stories and experiences, and these may be reduced to a mere faded memory in Singapore’s history.
 
-![Ubin Kakis team walking on jetty](/assets/Images/team-walking-on-jetty.png)
+![](/assets/Images/team-walking-on-jetty.png)
 
 I hope, then, that this project can do something to elevate public awareness and interest in Pulau Ubin. May this project convey our hopes for Pulau Ubin to continue to be a cherished island home with thriving communities, and to be greatly appreciated by generations of Singaporeans for years to come. I can’t wait to meet the residents again and I’m sure the whole team feels the same way—having genuine conversations with the community there always warms our hearts. I am excited to see what we can do in the coming months and at the end of our one-year run, it’ll definitely be heartwarming to look back on what the Ubin Kakis have documented in this little journal we’ve created. Till then!

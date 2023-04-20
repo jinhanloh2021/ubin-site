@@ -5,12 +5,14 @@ import CoverImage from '../../components/cover-image';
 import styles from './markdown-styles.module.scss';
 import PostDetails from '../../components/post-details';
 import CardArrowButton from '../../components/card-arrow-button';
+import { addImageCaptions } from '../../lib/utils';
 
 type Props = {
   post: PostType;
 };
 
 export default function Journal({ post: { slug, metadata, body } }: Props) {
+  const captionedBody = addImageCaptions(body);
   return (
     <>
       <Head>
@@ -43,7 +45,7 @@ export default function Journal({ post: { slug, metadata, body } }: Props) {
 
         <article
           className={styles.markdown}
-          dangerouslySetInnerHTML={{ __html: body }}
+          dangerouslySetInnerHTML={{ __html: captionedBody }}
         />
       </div>
     </>

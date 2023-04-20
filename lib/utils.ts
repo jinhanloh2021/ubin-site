@@ -1,20 +1,19 @@
-const months = {
-  '1': 'January',
-  '2': 'February',
-  '3': 'March',
-  '4': 'April',
-  '5': 'May',
-  '6': 'June',
-  '7': 'July',
-  '8': 'August',
-  '9': 'September',
-  '10': 'October',
-  '11': 'November',
-  '12': 'December',
-};
+import { parse } from 'node-html-parser';
+import DOMPurify from 'isomorphic-dompurify';
 
-export const dateFormatter = (date: string): string => {
-  const nums = date.split('-');
+export function addImageCaptions(html: string): string {
+  const root = parse(html);
+  const imageTags = root.getElementsByTagName('img');
 
-  return '';
-};
+  for (const imgTag of imageTags) {
+    const caption = imgTag.attributes.alt;
+    if (caption !== null && caption.trim() !== '') {
+      const sanitizedCaption = DOMPurify.sanitize(caption.trim());
+      imgTag.insertAdjacentHTML(
+        'afterend',
+        `<p class="post__image__caption">${sanitizedCaption}</p>`
+      );
+    }
+  }
+  return root.toString();
+}

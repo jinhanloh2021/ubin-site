@@ -2,8 +2,14 @@
   @apply lg:text-xl text-[1.125rem] font-body lg:mb-16 mb-10;
 }
 
+.markdown :global {
+  .post__image__caption {
+    @apply md:text-sm text-[0.75rem] lg:leading-6 leading-4 text-gray-500 font-display font-light indent-0 text-center lg:mx-24 md:mx-20 lg:mt-[-1rem] mt-[-.5rem] md:mb-4 mb-3;
+  }
+}
+
 .markdown p {
-  @apply lg:leading-8 leading-7 lg:indent-16 indent-8;
+  @apply lg:leading-8 leading-7 indent-0;
 }
 
 .markdown ul {
