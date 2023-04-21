@@ -24,7 +24,7 @@ export default function PostPreview({ post, children }: Props) {
           {post.metadata.title}
         </h1>
       </Link>
-      <p className='lg:text-xl text-[1.125rem] leading-6 text-bodySecondary'>
+      <p className='lg:text-xl text-[1.125rem] line-clamp-2 text-bodySecondary'>
         {post.metadata.excerpt}
       </p>
       <PostDetails author={post.metadata.author} date={post.metadata.date} />

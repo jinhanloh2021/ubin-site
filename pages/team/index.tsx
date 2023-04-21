@@ -3,9 +3,6 @@ import Navbar from '../../components/navbar';
 import Head from 'next/head';
 import CoverImage from '../../components/cover-image';
 import TeamName from '../../components/team-name';
-import Image from 'next/image';
-import MemberImg from '../../components/member-img';
-import AuthorTag from '../../components/author-tag';
 import { members, team } from '../../lib/constants';
 import { MemberType } from '../../interfaces/MemberType';
 import MemberArticle from '../../components/member-article';
@@ -16,14 +13,6 @@ type Props = {
 };
 
 export default function TeamPage({ memberList }: Props) {
-  const renderOrder = team.flatMap((t) =>
-    memberList
-      .filter((m) => m.team === t)
-      .map((m, i) => ({
-        member: m,
-        align: i % 2 === 0 ? 'left' : 'right',
-      }))
-  );
   return (
     <>
       <Navbar />

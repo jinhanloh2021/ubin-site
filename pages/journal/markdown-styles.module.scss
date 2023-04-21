@@ -2,8 +2,15 @@
   @apply lg:text-xl text-[1.125rem] font-body lg:mb-16 mb-10;
 }
 
+.markdown :global {
+  .post__image__caption {
+    @apply md:text-sm text-[0.75rem] lg:leading-6 leading-4 text-gray-500 font-display font-light indent-0 text-center lg:mx-[10%] md:mx-[8%] lg:mt-[-1rem] mt-[-.5rem] md:mb-4 mb-3;
+    text-wrap: balance; /*experimental*/
+  }
+}
+
 .markdown p {
-  @apply lg:leading-8 leading-7 lg:indent-16 indent-8;
+  @apply lg:leading-8 leading-7 indent-0;
 }
 
 .markdown ul {
@@ -67,5 +74,5 @@
 }
 
 .markdown img {
-  @apply lg:min-h-[50vh] min-h-[30vh] object-cover bg-no-repeat bg-center overflow-hidden select-none lg:my-8 my-4;
+  @apply lg:min-h-[20vh] min-h-[30vh] object-cover bg-no-repeat bg-center overflow-hidden select-none lg:my-8 my-4 mx-auto;
 }

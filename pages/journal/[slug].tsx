@@ -5,12 +5,14 @@ import CoverImage from '../../components/cover-image';
 import styles from './markdown-styles.module.scss';
 import PostDetails from '../../components/post-details';
 import CardArrowButton from '../../components/card-arrow-button';
+import { addImageCaptions } from '../../lib/utils';
 
 type Props = {
   post: PostType;
 };
 
 export default function Journal({ post: { slug, metadata, body } }: Props) {
+  const captionedBody = addImageCaptions(body);
   return (
     <>
       <Head>
@@ -31,9 +33,19 @@ export default function Journal({ post: { slug, metadata, body } }: Props) {
           {metadata.title}
         </h1>
         <PostDetails author={metadata.author} date={metadata.date} />
+        {metadata.videoURL && (
+          <iframe
+            className='w-full md:h-[50vh] sm:h-[40vh] h-[30vh] lg:my-8 my-4 mx-auto'
+            src={metadata.videoURL}
+            title='YouTube video player'
+            allow='clipboard-write; picture-in-picture; web-share'
+            allowFullScreen
+          ></iframe>
+        )}
+
         <article
           className={styles.markdown}
-          dangerouslySetInnerHTML={{ __html: body }}
+          dangerouslySetInnerHTML={{ __html: captionedBody }}
         />
       </div>
     </>

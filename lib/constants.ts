@@ -12,7 +12,7 @@ export const members: MemberType[] = [
     team: 'Committee',
     photo: 'ansley.png',
     statement:
-      'I truly hope that more people will understand the cultural significance that Ubin holds because of the residents themselves. I want this project to be able to help visitors make greater meaning of their experiences on the island, one that is beyond a simple cycling destination or a place to get away from the city!',
+      "I truly hope that more people will come to understand the cultural significance that Ubin holds because of the residents themselves who have such rich stories and valuable practices :') I hope this project helps people make greater meaning from their experience on the island, and I can't wait to meet and learn from even more residents and other important groups like the different volunteers!",
     alt: '',
   },
   {
@@ -21,7 +21,7 @@ export const members: MemberType[] = [
     team: 'Interview',
     photo: 'adele.png',
     statement:
-      'I hope to form meaningful relationships with the residents and getting to know their stories.',
+      'I hope to form meaningful relationships with the residents and get to know their stories.',
     alt: '',
   },
   {
@@ -80,4 +80,4 @@ export const members: MemberType[] = [
   },
 ];
 
-export const team: string[] = ['Committee', 'Interview', 'Socials'];
+export const team: string[] = ['Committee', 'Interviews', 'Socials'];
