@@ -36,7 +36,7 @@ export default function Sponsor({}: Props) {
       <div className='flex relative flex-row justify-center align-middle lg:gap-16 gap-6 lg:mb-12 lg:mt-12 mb-8 mt-8 lg:h-24 h-16'>
         <div className='w-24 lg:w-48 relative'>
           <Image
-            src='/assets/Images/C4SR-logo.jpg'
+            src='/assets/Images/C4SR-logo-removebg-preview.png'
             alt=''
             fill
             sizes='100%'
