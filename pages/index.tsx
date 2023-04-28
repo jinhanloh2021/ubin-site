@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import PostType from '../interfaces/PostType';
 import { getAllPosts } from '../lib/posts';
@@ -19,7 +18,6 @@ type Props = {
 };
 
 export default function HomePage({ missionText, post }: Props) {
-  const router = useRouter();
   const { width, height } = useWindowSize();
   const isMobile = width < 1024;
   return (
