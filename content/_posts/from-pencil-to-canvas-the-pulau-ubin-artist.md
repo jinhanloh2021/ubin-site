@@ -4,7 +4,7 @@ title: "From Pencil to Canvas: The Pulau Ubin Artist"
 author: "Ubin Kakis Team"
 excerpt: "Meet our Project Partner, Artsolute! In this video, we'll be chatting with Terence, Founder and Director of Artsolute."
 videoURL: "https://www.youtube.com/embed/BvbEVIYmsRk"
-coverImage: "ubin-artist-cover.jpg"
+coverImage: "ubin-artist-group-pic-cover.png"
 altText: "Artist Terence Tan looking at the camera"
 ---
 Meet our Project Partner, Artsolute! In this video, we'll be chatting with Terence, Founder and Director of Artsolute.
