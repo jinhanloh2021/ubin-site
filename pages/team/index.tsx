@@ -7,6 +7,8 @@ import { members, team } from '../../lib/constants';
 import { MemberType } from '../../interfaces/MemberType';
 import MemberArticle from '../../components/member-article';
 import LandingTitle from '../../components/landing-title';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { GET_ALL_MEMBERS } from '../../graphql/queries';
 
 type Props = {
   memberList: MemberType[];
@@ -51,6 +53,27 @@ export default function TeamPage({ memberList }: Props) {
 }
 
 export async function getStaticProps() {
-  const memberList: MemberType[] = members;
+  const client = new ApolloClient({
+    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
+    cache: new InMemoryCache(),
+  });
+  const {
+    data: {
+      members: { data },
+    },
+  } = await client.query({
+    query: GET_ALL_MEMBERS,
+  });
+
+  const memberList: MemberType[] = data.map((e) => {
+    return {
+      name: e.attributes.Name,
+      position: e.attributes.Position,
+      team: e.attributes.Team,
+      photo: e.attributes.Profile_img.data.attributes.url,
+      statement: e.attributes.Personal_statement,
+      alt: '',
+    };
+  });
   return { props: { memberList } };
 }

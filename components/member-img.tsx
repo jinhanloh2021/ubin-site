@@ -11,7 +11,7 @@ export default function MemberImg({ src, alt }: Props) {
     // relative m-auto lg:min-w-[20rem] w-[100%] lg:h-96 h-80
     <div className='relative m-auto xl:min-w-[20rem] xl:h-96 md:min-w-[20rem] md:h-96 w-[100%]  h-80'>
       <Image
-        src={`/assets/Images/${src}`}
+        src={src}
         alt={alt}
         fill
         sizes='100%'
