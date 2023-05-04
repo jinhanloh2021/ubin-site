@@ -8,7 +8,7 @@ export type MDMetadata = {
   date: string;
   title: string;
   author: string;
-  excerpt: string;
+  excerpt?: string;
   videoURL?: string;
   coverImage: string;
   altText: string;

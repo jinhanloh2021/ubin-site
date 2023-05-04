@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import { getPost, getSlugs } from '../../lib/posts';
 import PostType from '../../interfaces/PostType';
 import CoverImage from '../../components/cover-image';
 import styles from './markdown-styles.module.scss';
 import PostDetails from '../../components/post-details';
 import CardArrowButton from '../../components/card-arrow-button';
 import { addImageCaptions } from '../../lib/utils';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { GET_ALL_POSTS_TITLE, GET_POST_BY_TITLE } from '../../graphql/queries';
 
 type Props = {
   post: PostType;
@@ -53,17 +54,85 @@ export default function Journal({ post: { slug, metadata, body } }: Props) {
 }
 
 export async function getStaticPaths() {
-  const slugs = await getSlugs(); //loops through posts and get filenames
+  const client = new ApolloClient({
+    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
+    cache: new InMemoryCache(),
+  });
+
+  const {
+    data: {
+      posts: { data: DataArr },
+    },
+  } = await client.query({
+    query: GET_ALL_POSTS_TITLE,
+  });
+  const slugArr: string[] = DataArr.map((e) =>
+    e.attributes.Title.toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+  );
   return {
-    paths: slugs.map((slug) => ({
+    paths: slugArr.map((slug) => ({
       params: { slug },
     })),
     fallback: false,
   };
 }
 
+interface QueryResponseType {
+  posts: {
+    data: Array<{
+      attributes: {
+        Title: string;
+      };
+    }>;
+  };
+}
+
 export async function getStaticProps({ params: { slug } }) {
-  const post: PostType = await getPost(slug); //get post object from pathname (filename)
+  const client = new ApolloClient({
+    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
+    cache: new InMemoryCache(),
+  });
+
+  const {
+    data: {
+      posts: { data: postData },
+    },
+  } = await client.query<QueryResponseType>({
+    query: GET_ALL_POSTS_TITLE,
+  });
+
+  const title = postData.find(
+    (e) =>
+      e.attributes.Title.toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '') === slug
+  ).attributes.Title;
+
+  const resPost = (
+    await client.query({
+      query: GET_POST_BY_TITLE(title),
+    })
+  ).data.posts.data[0].attributes;
+
+  const post: PostType = {
+    slug: slug,
+    metadata: {
+      date: resPost.Date,
+      title: title,
+      author: resPost.Author,
+      videoURL: resPost.Video_URL,
+      coverImage: resPost.Cover_image.data.attributes.url,
+      altText: resPost.Cover_image.data.attributes.alternativeText,
+    },
+    body: resPost.Content,
+  };
+  // console.log(post);
   return {
     props: { post },
   };
