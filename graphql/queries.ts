@@ -2,22 +2,18 @@ import { gql } from '@apollo/client';
 
 const GET_ALL_POSTS = gql`
   query {
-    posts {
+    posts(sort: "Date:desc") {
       data {
-        id
         attributes {
           Title
           Date
           Author
           Excerpt
           Video_URL
-          Content
           Cover_image {
             data {
               attributes {
-                caption
-                alternativeText
-                formats
+                url
               }
             }
           }

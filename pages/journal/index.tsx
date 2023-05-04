@@ -2,10 +2,10 @@ import Head from 'next/head';
 import CoverImage from '../../components/cover-image';
 import Navbar from '../../components/navbar';
 import PostType from '../../interfaces/PostType';
-import { getAllPosts } from '../../lib/posts';
 import PostPreview from '../../components/post-preview';
 import LandingTitle from '../../components/landing-title';
-import moment from 'moment';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { GET_ALL_POSTS } from '../../graphql/queries';
 
 type Props = {
   posts: PostType[];
@@ -37,12 +37,39 @@ export default function JournalPage({ posts }: Props) {
   );
 }
 
+// todo: Pagination for post page. Current just show all posts
 export async function getStaticProps() {
-  const posts: PostType[] = await getAllPosts(); //get post object from pathname (filename)
-  posts.sort((a, b) => {
-    const dateA = moment(a.metadata.date, 'DD-MM-YY');
-    const dateB = moment(b.metadata.date, 'DD-MM-YY');
-    return dateB.diff(dateA);
+  const client = new ApolloClient({
+    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
+    cache: new InMemoryCache(),
+  });
+
+  const {
+    data: {
+      posts: { data: PostDataArr },
+    },
+  } = await client.query({
+    query: GET_ALL_POSTS,
+  });
+
+  const posts: PostType[] = PostDataArr.map((p) => {
+    return {
+      slug: p.attributes.Title.toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, ''),
+      metadata: {
+        date: p.attributes.Date,
+        title: p.attributes.Title,
+        author: p.attributes.Author,
+        excerpt: p.attributes.Excerpt,
+        videoURL: p.attributes.Video_URL,
+        coverImage: p.attributes.Cover_image.data.attributes.url,
+        altText: '',
+      },
+      body: '',
+    };
   });
   return {
     props: { posts },

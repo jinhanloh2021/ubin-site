@@ -1,7 +1,7 @@
 type PostType = {
   slug: string;
   metadata: MDMetadata;
-  body: string;
+  body?: string;
 };
 
 export type MDMetadata = {
