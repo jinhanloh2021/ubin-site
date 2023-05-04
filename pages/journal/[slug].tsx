@@ -4,20 +4,22 @@ import CoverImage from '../../components/cover-image';
 import styles from './markdown-styles.module.scss';
 import PostDetails from '../../components/post-details';
 import CardArrowButton from '../../components/card-arrow-button';
-import { addImageCaptions } from '../../lib/utils';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GET_ALL_POSTS_TITLE, GET_POST_BY_TITLE } from '../../graphql/queries';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
+import Caption from '../../components/Caption';
 
 type Props = {
   post: PostType;
 };
 
-export default function Journal({ post: { slug, metadata, body } }: Props) {
-  const captionedBody = addImageCaptions(body);
+const components = { Caption };
+export default function Journal({ post: { metadata, body } }: Props) {
   return (
     <>
       <Head>
-        <title>{`Journal - ${slug}`}</title>
+        <title>{`Journal - ${metadata.title}`}</title>
       </Head>
       {!metadata.coverImage || (
         <CoverImage
@@ -43,11 +45,9 @@ export default function Journal({ post: { slug, metadata, body } }: Props) {
             allowFullScreen
           ></iframe>
         )}
-
-        <article
-          className={styles.markdown}
-          dangerouslySetInnerHTML={{ __html: captionedBody }}
-        />
+        <article className={styles.markdown}>
+          <MDXRemote {...body} components={components} />
+        </article>
       </div>
     </>
   );
@@ -120,6 +120,7 @@ export async function getStaticProps({ params: { slug } }) {
     })
   ).data.posts.data[0].attributes;
 
+  const content = await serialize(resPost.Content);
   const post: PostType = {
     slug: slug,
     metadata: {
@@ -130,7 +131,7 @@ export async function getStaticProps({ params: { slug } }) {
       coverImage: resPost.Cover_image.data.attributes.url,
       altText: resPost.Cover_image.data.attributes.alternativeText,
     },
-    body: resPost.Content,
+    body: content,
   };
   // console.log(post);
   return {
