@@ -8,13 +8,14 @@ import { MemberType } from '../../interfaces/MemberType';
 import MemberArticle from '../../components/member-article';
 import LandingTitle from '../../components/landing-title';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { GET_ALL_MEMBERS } from '../../graphql/queries';
+import { GET_ALL_MEMBERS, GET_TEAM_COVER_IMG } from '../../graphql/queries';
 
 type Props = {
   memberList: MemberType[];
+  coverImgSrc: string;
 };
 
-export default function TeamPage({ memberList }: Props) {
+export default function TeamPage({ memberList, coverImgSrc }: Props) {
   return (
     <>
       <Navbar />
@@ -24,7 +25,7 @@ export default function TeamPage({ memberList }: Props) {
       <main className='min-h-screen'>
         <section id='journal-landing-img' className={`h-[100vh]`}>
           <CoverImage
-            src='TaxiStandGroupPhoto.png'
+            src={coverImgSrc}
             height='100vh'
             alt='Boat parked at Pulau Ubin jetty with background of the shore'
           />
@@ -57,6 +58,24 @@ export async function getStaticProps() {
     uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
     cache: new InMemoryCache(),
   });
+
+  const {
+    data: {
+      teamMedia: {
+        data: {
+          attributes: {
+            Cover_img: {
+              data: {
+                attributes: { url },
+              },
+            },
+          },
+        },
+      },
+    },
+  } = await client.query({
+    query: GET_TEAM_COVER_IMG,
+  });
   const {
     data: {
       members: { data },
@@ -75,5 +94,5 @@ export async function getStaticProps() {
       alt: '',
     };
   });
-  return { props: { memberList } };
+  return { props: { memberList, coverImgSrc: url } };
 }

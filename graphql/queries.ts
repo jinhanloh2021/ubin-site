@@ -50,4 +50,45 @@ const GET_ALL_MEMBERS = gql`
   }
 `;
 
-export { GET_ALL_POSTS, GET_ALL_MEMBERS };
+const GET_TEAM_COVER_IMG = gql`
+  query {
+    teamMedia {
+      data {
+        attributes {
+          Cover_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const GET_JOURNAL_COVER_IMG = gql`
+  query {
+    journalMedia {
+      data {
+        attributes {
+          Cover_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export {
+  GET_ALL_POSTS,
+  GET_ALL_MEMBERS,
+  GET_TEAM_COVER_IMG,
+  GET_JOURNAL_COVER_IMG,
+};

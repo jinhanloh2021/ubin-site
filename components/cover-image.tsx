@@ -10,7 +10,7 @@ const CoverImage = ({ src, height, alt }: Props) => {
   return (
     <div className='relative' style={{ height: `${height}` }}>
       <Image
-        src={`/assets/Images/${src}`}
+        src={src}
         alt={alt}
         fill
         sizes='100%'
