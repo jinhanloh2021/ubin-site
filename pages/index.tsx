@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import PostType from '../interfaces/PostType';
-import { getAllPosts } from '../lib/posts';
 import useWindowSize from '../hooks/useWindowSize';
 import AuthorTag from '../components/author-tag';
 import Navbar from '../components/navbar';
@@ -10,14 +9,22 @@ import CoverImage from '../components/cover-image';
 import PostPreview from '../components/post-preview';
 import LandingTitle from '../components/landing-title';
 import CardArrowButton from '../components/card-arrow-button';
-import moment from 'moment';
+import client from '../graphql/apollo-client';
+import { GET_HOME_MEDIA, GET_LATEST_POST } from '../graphql/queries';
+import _ from 'lodash';
 
 type Props = {
   missionText: string;
   post: PostType;
+  imageSources: {
+    coverImgSrc: string;
+    projectLogoSrc: string;
+    sectionDividerSrc: string;
+    teamImageSrc: string;
+  };
 };
 
-export default function HomePage({ missionText, post }: Props) {
+export default function HomePage({ missionText, post, imageSources }: Props) {
   const { width, height } = useWindowSize();
   const isMobile = width < 1024;
   return (
@@ -29,7 +36,7 @@ export default function HomePage({ missionText, post }: Props) {
       <main className='font-display min-h-screen'>
         <section id='Home Landing img'>
           <CoverImage
-            src='BicycleRental1.png'
+            src={imageSources.coverImgSrc}
             alt='Image of 45C bicycle rental shop on Pulau Ubin'
             height='100vh'
           />
@@ -44,7 +51,7 @@ export default function HomePage({ missionText, post }: Props) {
           </h1>
           <Image
             className='lg:h-[30%] lg:w-[30%] sm:h-[50%] sm:w-[50%] h-[80%] w-[80%] m-auto object-fit'
-            src='/assets/Images/UbinKakisLogo.png'
+            src={imageSources.projectLogoSrc}
             alt='Logo'
             height={1000}
             width={1000}
@@ -60,7 +67,7 @@ export default function HomePage({ missionText, post }: Props) {
             />
           </div>
           <CoverImage
-            src={'DouDouandLeLe.png'}
+            src={imageSources.sectionDividerSrc}
             alt='Two dogs dou dou and le le looking in the distance'
             height={isMobile ? '30vh' : '60vh'}
           />
@@ -83,7 +90,7 @@ export default function HomePage({ missionText, post }: Props) {
             <div className='lg:rounded-[1.125rem] rounded-[1rem] overflow-hidden select-none cursor-pointer'>
               <Link href={`/team`}>
                 <CoverImage
-                  src={'TeamPicHome.png'}
+                  src={imageSources.teamImageSrc}
                   alt='Ubin Kakis team smiling at the camera'
                   height='30rem'
                 />
@@ -105,16 +112,65 @@ export default function HomePage({ missionText, post }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const missionText =
-    "Our goal for this project is to form meaningful connections with the communities on Pulau Ubin and share their cultures and kampung life with more Singaporeans. We'll be releasing content on a regular basis, and we sincerely hope that more Singaporeans will come to appreciate the cultural significance of Pulau Ubin.";
-  const posts: PostType[] = await getAllPosts();
-  posts.sort((a, b) => {
-    const dateA = moment(a.metadata.date, 'DD-MM-YY');
-    const dateB = moment(b.metadata.date, 'DD-MM-YY');
-    return dateB.diff(dateA);
-  });
+  const {
+    data: {
+      homeMedia: {
+        data: {
+          attributes: {
+            Cover_image: {
+              data: {
+                attributes: { url: coverImgSrc },
+              },
+            },
+            Project_logo: {
+              data: {
+                attributes: { url: projectLogoSrc },
+              },
+            },
+            Section_divider: {
+              data: {
+                attributes: { url: sectionDividerSrc },
+              },
+            },
+            Team_image: {
+              data: {
+                attributes: { url: teamImageSrc },
+              },
+            },
+            Mission_text,
+          },
+        },
+      },
+    },
+  } = await client.query({ query: GET_HOME_MEDIA });
 
+  const {
+    data: {
+      posts: { data: latestPost },
+    },
+  } = await client.query({ query: GET_LATEST_POST });
+
+  const imageSources = {
+    coverImgSrc,
+    projectLogoSrc,
+    sectionDividerSrc,
+    teamImageSrc,
+  };
+
+  const post: PostType = {
+    slug: _.kebabCase(latestPost[0].attributes.Title),
+    metadata: {
+      date: latestPost[0].attributes.Date,
+      title: latestPost[0].attributes.Title,
+      author: latestPost[0].attributes.Author,
+      excerpt: latestPost[0].attributes.Excerpt,
+      videoURL: latestPost[0].attributes.Video_URL,
+      coverImage: latestPost[0].attributes.Cover_image.data.attributes.url,
+      altText: '',
+    },
+    body: null,
+  };
   return {
-    props: { missionText, post: posts[0] },
+    props: { imageSources, missionText: Mission_text, post },
   };
 };

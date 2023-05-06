@@ -123,6 +123,69 @@ const GET_JOURNAL_COVER_IMG = gql`
   }
 `;
 
+const GET_HOME_MEDIA = gql`
+  query {
+    homeMedia {
+      data {
+        attributes {
+          Cover_image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Project_logo {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Section_divider {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Team_image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Mission_text
+        }
+      }
+    }
+  }
+`;
+
+const GET_LATEST_POST = gql`
+  query {
+    posts(sort: "Date:desc", pagination: { start: 0, limit: 1 }) {
+      data {
+        attributes {
+          Title
+          Date
+          Author
+          Excerpt
+          Video_URL
+          Cover_image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export {
   GET_ALL_POSTS,
   GET_ALL_POSTS_TITLE,
@@ -130,4 +193,6 @@ export {
   GET_TEAM_COVER_IMG,
   GET_JOURNAL_COVER_IMG,
   GET_POST_BY_TITLE,
+  GET_HOME_MEDIA,
+  GET_LATEST_POST,
 };

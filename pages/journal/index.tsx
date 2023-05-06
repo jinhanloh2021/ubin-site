@@ -6,6 +6,7 @@ import PostPreview from '../../components/post-preview';
 import LandingTitle from '../../components/landing-title';
 import { GET_ALL_POSTS, GET_JOURNAL_COVER_IMG } from '../../graphql/queries';
 import client from '../../graphql/apollo-client';
+import _ from 'lodash';
 
 type Props = {
   posts: PostType[];
@@ -69,11 +70,7 @@ export async function getStaticProps() {
 
   const posts: PostType[] = PostDataArr.map((p) => {
     return {
-      slug: p.attributes.Title.toLowerCase()
-        .trim()
-        .replace(/[^\w\s-]/g, '')
-        .replace(/[\s_-]+/g, '-')
-        .replace(/^-+|-+$/g, ''),
+      slug: _.kebabCase(p.attributes.Title),
       metadata: {
         date: p.attributes.Date,
         title: p.attributes.Title,

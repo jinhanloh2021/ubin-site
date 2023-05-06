@@ -9,6 +9,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Caption from '../../components/Caption';
 import client from '../../graphql/apollo-client';
+import _ from 'lodash';
 
 type Props = {
   post: PostType;
@@ -61,13 +62,7 @@ export async function getStaticPaths() {
   } = await client.query({
     query: GET_ALL_POSTS_TITLE,
   });
-  const slugArr: string[] = DataArr.map((e) =>
-    e.attributes.Title.toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/[\s_-]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-  );
+  const slugArr: string[] = DataArr.map((e) => _.kebabCase(e.attributes.Title));
   return {
     paths: slugArr.map((slug) => ({
       params: { slug },
@@ -85,14 +80,8 @@ export async function getStaticProps({ params: { slug } }) {
     query: GET_ALL_POSTS_TITLE,
   });
 
-  const title = postData.find(
-    (e) =>
-      e.attributes.Title.toLowerCase()
-        .trim()
-        .replace(/[^\w\s-]/g, '')
-        .replace(/[\s_-]+/g, '-')
-        .replace(/^-+|-+$/g, '') === slug
-  ).attributes.Title;
+  const title = postData.find((e) => _.kebabCase(e.attributes.Title) === slug)
+    .attributes.Title;
 
   const resPost = (
     await client.query({
