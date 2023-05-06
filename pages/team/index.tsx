@@ -3,12 +3,12 @@ import Navbar from '../../components/navbar';
 import Head from 'next/head';
 import CoverImage from '../../components/cover-image';
 import TeamName from '../../components/team-name';
-import { members, team } from '../../lib/constants';
+import { team } from '../../lib/constants';
 import { MemberType } from '../../interfaces/MemberType';
 import MemberArticle from '../../components/member-article';
 import LandingTitle from '../../components/landing-title';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GET_ALL_MEMBERS, GET_TEAM_COVER_IMG } from '../../graphql/queries';
+import client from '../../graphql/apollo-client';
 
 type Props = {
   memberList: MemberType[];
@@ -54,11 +54,6 @@ export default function TeamPage({ memberList, coverImgSrc }: Props) {
 }
 
 export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
-    cache: new InMemoryCache(),
-  });
-
   const {
     data: {
       teamMedia: {

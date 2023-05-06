@@ -4,8 +4,8 @@ import Navbar from '../../components/navbar';
 import PostType from '../../interfaces/PostType';
 import PostPreview from '../../components/post-preview';
 import LandingTitle from '../../components/landing-title';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GET_ALL_POSTS } from '../../graphql/queries';
+import client from '../../graphql/apollo-client';
 
 type Props = {
   posts: PostType[];
@@ -39,11 +39,6 @@ export default function JournalPage({ posts }: Props) {
 
 // todo: Pagination for post page. Current just show all posts
 export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
-    cache: new InMemoryCache(),
-  });
-
   const {
     data: {
       posts: { data: PostDataArr },

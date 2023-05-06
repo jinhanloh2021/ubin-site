@@ -4,11 +4,11 @@ import CoverImage from '../../components/cover-image';
 import styles from './markdown-styles.module.scss';
 import PostDetails from '../../components/post-details';
 import CardArrowButton from '../../components/card-arrow-button';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GET_ALL_POSTS_TITLE, GET_POST_BY_TITLE } from '../../graphql/queries';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Caption from '../../components/Caption';
+import client from '../../graphql/apollo-client';
 
 type Props = {
   post: PostType;
@@ -54,11 +54,6 @@ export default function Journal({ post: { metadata, body } }: Props) {
 }
 
 export async function getStaticPaths() {
-  const client = new ApolloClient({
-    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
-    cache: new InMemoryCache(),
-  });
-
   const {
     data: {
       posts: { data: DataArr },
@@ -81,27 +76,12 @@ export async function getStaticPaths() {
   };
 }
 
-interface QueryResponseType {
-  posts: {
-    data: Array<{
-      attributes: {
-        Title: string;
-      };
-    }>;
-  };
-}
-
 export async function getStaticProps({ params: { slug } }) {
-  const client = new ApolloClient({
-    uri: process.env.STRAPI_PULIC_API_URL || 'http://localhost:1337/graphql',
-    cache: new InMemoryCache(),
-  });
-
   const {
     data: {
       posts: { data: postData },
     },
-  } = await client.query<QueryResponseType>({
+  } = await client.query<GetAllTitleRes>({
     query: GET_ALL_POSTS_TITLE,
   });
 
@@ -120,7 +100,7 @@ export async function getStaticProps({ params: { slug } }) {
     })
   ).data.posts.data[0].attributes;
 
-  const content = await serialize(resPost.Content);
+  const content = await serialize(resPost.Content); // Parse and compile MDX string
   const post: PostType = {
     slug: slug,
     metadata: {
