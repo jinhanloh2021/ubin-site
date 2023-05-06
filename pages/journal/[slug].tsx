@@ -102,7 +102,6 @@ export async function getStaticProps({ params: { slug } }) {
     },
     body: content,
   };
-  // console.log(post);
   return {
     props: { post },
   };

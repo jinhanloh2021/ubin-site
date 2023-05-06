@@ -58,7 +58,6 @@ export async function getStaticProps() {
   } = await client.query({
     query: GET_JOURNAL_COVER_IMG,
   });
-  console.log(url);
 
   const {
     data: {
