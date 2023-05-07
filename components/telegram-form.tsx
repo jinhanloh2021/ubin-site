@@ -59,14 +59,12 @@ export default function TelegramForm({}: Props) {
 
     try {
       const response = await axios.get<TelegramResponse>(telegramUrl);
-      console.log('Message sent successfully!', response.data.result);
 
       setOpen({
         snackbarState: true,
         buttonState: true,
       });
     } catch (error) {
-      console.error('Error sending message:', error);
     }
   };
 

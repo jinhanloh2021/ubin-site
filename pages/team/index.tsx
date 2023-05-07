@@ -3,16 +3,19 @@ import Navbar from '../../components/navbar';
 import Head from 'next/head';
 import CoverImage from '../../components/cover-image';
 import TeamName from '../../components/team-name';
-import { members, team } from '../../lib/constants';
+import { team } from '../../lib/constants';
 import { MemberType } from '../../interfaces/MemberType';
 import MemberArticle from '../../components/member-article';
 import LandingTitle from '../../components/landing-title';
+import { GET_ALL_MEMBERS, GET_TEAM_COVER_IMG } from '../../graphql/queries';
+import client from '../../graphql/apollo-client';
 
 type Props = {
   memberList: MemberType[];
+  coverImgSrc: string;
 };
 
-export default function TeamPage({ memberList }: Props) {
+export default function TeamPage({ memberList, coverImgSrc }: Props) {
   return (
     <>
       <Navbar />
@@ -22,7 +25,7 @@ export default function TeamPage({ memberList }: Props) {
       <main className='min-h-screen'>
         <section id='journal-landing-img' className={`h-[100vh]`}>
           <CoverImage
-            src='TaxiStandGroupPhoto.png'
+            src={coverImgSrc}
             height='100vh'
             alt='Boat parked at Pulau Ubin jetty with background of the shore'
           />
@@ -51,6 +54,40 @@ export default function TeamPage({ memberList }: Props) {
 }
 
 export async function getStaticProps() {
-  const memberList: MemberType[] = members;
-  return { props: { memberList } };
+  const {
+    data: {
+      teamMedia: {
+        data: {
+          attributes: {
+            Cover_img: {
+              data: {
+                attributes: { url },
+              },
+            },
+          },
+        },
+      },
+    },
+  } = await client.query({
+    query: GET_TEAM_COVER_IMG,
+  });
+  const {
+    data: {
+      members: { data },
+    },
+  } = await client.query({
+    query: GET_ALL_MEMBERS,
+  });
+
+  const memberList: MemberType[] = data.map((e) => {
+    return {
+      name: e.attributes.Name,
+      position: e.attributes.Position,
+      team: e.attributes.Team,
+      photo: e.attributes.Profile_img.data.attributes.url,
+      statement: e.attributes.Personal_statement,
+      alt: '',
+    };
+  });
+  return { props: { memberList, coverImgSrc: url } };
 }

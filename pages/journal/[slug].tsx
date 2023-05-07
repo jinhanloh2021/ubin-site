@@ -1,22 +1,27 @@
 import Head from 'next/head';
-import { getPost, getSlugs } from '../../lib/posts';
 import PostType from '../../interfaces/PostType';
 import CoverImage from '../../components/cover-image';
 import styles from './markdown-styles.module.scss';
 import PostDetails from '../../components/post-details';
 import CardArrowButton from '../../components/card-arrow-button';
-import { addImageCaptions } from '../../lib/utils';
+import { GET_ALL_POSTS_TITLE, GET_POST_BY_TITLE } from '../../graphql/queries';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
+import Caption from '../../components/Caption';
+import client from '../../graphql/apollo-client';
+import _ from 'lodash';
+import GetAllTitleRes from '../../interfaces/GetAllTitleRes';
 
 type Props = {
   post: PostType;
 };
 
-export default function Journal({ post: { slug, metadata, body } }: Props) {
-  const captionedBody = addImageCaptions(body);
+const components = { Caption };
+export default function Journal({ post: { metadata, body } }: Props) {
   return (
     <>
       <Head>
-        <title>{`Journal - ${slug}`}</title>
+        <title>{`Journal - ${metadata.title}`}</title>
       </Head>
       {!metadata.coverImage || (
         <CoverImage
@@ -42,20 +47,25 @@ export default function Journal({ post: { slug, metadata, body } }: Props) {
             allowFullScreen
           ></iframe>
         )}
-
-        <article
-          className={styles.markdown}
-          dangerouslySetInnerHTML={{ __html: captionedBody }}
-        />
+        <article className={styles.markdown}>
+          <MDXRemote {...body} components={components} />
+        </article>
       </div>
     </>
   );
 }
 
 export async function getStaticPaths() {
-  const slugs = await getSlugs(); //loops through posts and get filenames
+  const {
+    data: {
+      posts: { data: DataArr },
+    },
+  } = await client.query({
+    query: GET_ALL_POSTS_TITLE,
+  });
+  const slugArr: string[] = DataArr.map((e) => _.kebabCase(e.attributes.Title));
   return {
-    paths: slugs.map((slug) => ({
+    paths: slugArr.map((slug) => ({
       params: { slug },
     })),
     fallback: false,
@@ -63,7 +73,36 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const post: PostType = await getPost(slug); //get post object from pathname (filename)
+  const {
+    data: {
+      posts: { data: postData },
+    },
+  } = await client.query<GetAllTitleRes>({
+    query: GET_ALL_POSTS_TITLE,
+  });
+
+  const title = postData.find((e) => _.kebabCase(e.attributes.Title) === slug)
+    .attributes.Title;
+
+  const resPost = (
+    await client.query({
+      query: GET_POST_BY_TITLE(title),
+    })
+  ).data.posts.data[0].attributes;
+
+  const content = await serialize(resPost.Content); // Parse and compile MDX string
+  const post: PostType = {
+    slug: slug,
+    metadata: {
+      date: resPost.Date,
+      title: title,
+      author: resPost.Author,
+      videoURL: resPost.Video_URL,
+      coverImage: resPost.Cover_image.data.attributes.url,
+      altText: resPost.Cover_image.data.attributes.alternativeText,
+    },
+    body: content,
+  };
   return {
     props: { post },
   };
