@@ -10,6 +10,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import Caption from '../../components/Caption';
 import client from '../../graphql/apollo-client';
 import _ from 'lodash';
+import GetAllTitleRes from '../../interfaces/GetAllTitleRes';
 
 type Props = {
   post: PostType;

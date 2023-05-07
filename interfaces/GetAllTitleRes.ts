@@ -7,3 +7,5 @@ interface GetAllTitleRes {
     }>;
   };
 }
+
+export default GetAllTitleRes;
