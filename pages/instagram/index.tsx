@@ -2,17 +2,18 @@ import React from 'react';
 import client from '../../graphql/apollo-client';
 import { GET_ALL_INSTA } from '../../graphql/queries';
 import { InstagramPost } from '../../interfaces/InstagramPost';
+import InstaCard from '../../components/insta-card';
 type Props = {
   instaPosts: InstagramPost[];
 };
 
 export default function InstagramPage({ instaPosts }: Props) {
   return (
-    <>
+    <main className='grid grid-cols-3 place-items-center w-[60vh] m-auto gap-y-1'>
       {instaPosts.map((e) => (
-        <p>{JSON.stringify(e)}</p>
+        <InstaCard url={e.postUrl} src={e.imgUrl} />
       ))}
-    </>
+    </main>
   );
 }
 
