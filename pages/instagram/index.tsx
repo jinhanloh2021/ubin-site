@@ -1,0 +1,36 @@
+import React from 'react';
+import client from '../../graphql/apollo-client';
+import { GET_ALL_INSTA } from '../../graphql/queries';
+import { InstagramPost } from '../../interfaces/InstagramPost';
+type Props = {
+  instaPosts: InstagramPost[];
+};
+
+export default function InstagramPage({ instaPosts }: Props) {
+  return (
+    <>
+      {instaPosts.map((e) => (
+        <p>{JSON.stringify(e)}</p>
+      ))}
+    </>
+  );
+}
+
+export async function getStaticProps() {
+  const {
+    data: {
+      instaPosts: { data: instaDataArr },
+    },
+  } = await client.query({
+    query: GET_ALL_INSTA,
+  });
+  const instaPosts: InstagramPost[] = instaDataArr.map((e: any) => {
+    return {
+      postUrl: e.attributes.PostURL,
+      imgUrl: e.attributes.CoverImage.data.attributes.url,
+      date: e.attributes.Date,
+    };
+  });
+
+  return { props: { instaPosts } };
+}

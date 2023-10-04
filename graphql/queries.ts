@@ -186,6 +186,26 @@ const GET_LATEST_POST = gql`
   }
 `;
 
+const GET_ALL_INSTA = gql`
+  query {
+    instaPosts {
+      data {
+        attributes {
+          PostURL
+          CoverImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Date
+        }
+      }
+    }
+  }
+`;
+
 export {
   GET_ALL_POSTS,
   GET_ALL_POSTS_TITLE,
@@ -195,4 +215,5 @@ export {
   GET_POST_BY_TITLE,
   GET_HOME_MEDIA,
   GET_LATEST_POST,
+  GET_ALL_INSTA,
 };

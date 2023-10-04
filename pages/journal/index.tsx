@@ -61,22 +61,22 @@ export async function getStaticProps() {
 
   const {
     data: {
-      posts: { data: PostDataArr },
+      posts: { data: postDataArr },
     },
   } = await client.query({
     query: GET_ALL_POSTS,
   });
 
-  const posts: PostType[] = PostDataArr.map((p) => {
+  const posts: PostType[] = postDataArr.map((e: any) => {
     return {
-      slug: _.kebabCase(p.attributes.Title),
+      slug: _.kebabCase(e.attributes.Title),
       metadata: {
-        date: p.attributes.Date,
-        title: p.attributes.Title,
-        author: p.attributes.Author,
-        excerpt: p.attributes.Excerpt,
-        videoURL: p.attributes.Video_URL,
-        coverImage: p.attributes.Cover_image.data.attributes.url,
+        date: e.attributes.Date,
+        title: e.attributes.Title,
+        author: e.attributes.Author,
+        excerpt: e.attributes.Excerpt,
+        videoURL: e.attributes.Video_URL,
+        coverImage: e.attributes.Cover_image.data.attributes.url,
         altText: '',
       },
       body: '',
