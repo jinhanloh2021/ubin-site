@@ -3,35 +3,59 @@ import client from '../../graphql/apollo-client';
 import { GET_ALL_INSTA } from '../../graphql/queries';
 import { InstagramPost } from '../../interfaces/InstagramPost';
 import InstaCard from '../../components/insta-card';
+import Image from 'next/image';
 type Props = {
   instaPosts: InstagramPost[];
 };
 
 export default function InstagramPage({ instaPosts }: Props) {
   return (
-    <main className='grid grid-cols-3 place-items-center w-[60vh] m-auto gap-y-1'>
-      {instaPosts.map((e) => (
-        <InstaCard url={e.postUrl} src={e.imgUrl} />
+    <main className='grid grid-cols-3 place-items-center w-[90vw] sm:w-[72vw] md:w-[54vw] lg:w-[36vw] mx-auto gap-y-1 my-8'>
+      {fakeData.map((e, i) => (
+        <InstaCard url={e.postUrl} src={e.imgUrl} key={i} />
       ))}
     </main>
   );
 }
 
 export async function getStaticProps() {
-  const {
-    data: {
-      instaPosts: { data: instaDataArr },
-    },
-  } = await client.query({
-    query: GET_ALL_INSTA,
-  });
-  const instaPosts: InstagramPost[] = instaDataArr.map((e: any) => {
-    return {
-      postUrl: e.attributes.PostURL,
-      imgUrl: e.attributes.CoverImage.data.attributes.url,
-      date: e.attributes.Date,
-    };
-  });
+  // const {
+  //   data: {
+  //     instaPosts: { data: instaDataArr },
+  //   },
+  // } = await client.query({
+  //   query: GET_ALL_INSTA,
+  // });
+  // const instaPosts: InstagramPost[] = instaDataArr.map((e: any) => {
+  //   return {
+  //     postUrl: e.attributes.PostURL,
+  //     imgUrl: e.attributes.CoverImage.data.attributes.url,
+  //     date: e.attributes.Date,
+  //   };
+  // });
 
-  return { props: { instaPosts } };
+  return { props: { fakeData } };
 }
+
+const fakeData: InstagramPost[] = [
+  {
+    postUrl: '/',
+    imgUrl: '/assets/Images/Tote-Board-logo.png',
+    date: '1/1/23',
+  },
+  {
+    postUrl: '/',
+    imgUrl: '/assets/Images/Tote-Board-logo.png',
+    date: '1/1/23',
+  },
+  {
+    postUrl: '/',
+    imgUrl: '/assets/Images/Tote-Board-logo.png',
+    date: '1/1/23',
+  },
+  {
+    postUrl: '/',
+    imgUrl: '/assets/Images/Tote-Board-logo.png',
+    date: '1/1/23',
+  },
+];
