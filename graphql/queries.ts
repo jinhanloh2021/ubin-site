@@ -188,7 +188,7 @@ const GET_LATEST_POST = gql`
 
 const GET_ALL_INSTA = gql`
   query {
-    instaPosts {
+    instaPosts(sort: "Date:desc", pagination: { page: 1, pageSize: 100 }) {
       data {
         attributes {
           PostURL

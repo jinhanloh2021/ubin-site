@@ -16,7 +16,7 @@ export default function InstagramPage({ instaPosts }: Props) {
       <Head>
         <title>Ubin Kakis - Instagram</title>
       </Head>
-      <main className='grid grid-cols-3 place-items-center w-[90vw] sm:w-[72vw] md:w-[54vw] lg:w-[36vw] mx-auto gap-x-3 gap-y-1 mt-24 mb-12'>
+      <main className='grid grid-cols-3 place-items-center w-[90vw] sm:w-[72vw] md:w-[54vw] lg:w-[36vw] mx-auto gap-x-3 gap-y-1 pt-24 mb-12'>
         {instaPosts.map((e, i) => (
           <InstaCard url={e.postUrl} src={e.imgUrl} key={i} />
         ))}
@@ -40,11 +40,5 @@ export async function getStaticProps() {
       date: e.attributes.Date,
     };
   });
-  instaPosts.sort((a, b) => {
-    const timeA = new Date(a.date).getTime();
-    const timeB = new Date(b.date).getTime();
-    return timeB - timeA;
-  });
-
   return { props: { instaPosts } };
 }
