@@ -163,6 +163,24 @@ const GET_HOME_MEDIA = gql`
   }
 `;
 
+const GET_INSTA_COVER_IMG = gql`
+  query {
+    instaMedia {
+      data {
+        attributes {
+          Cover_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const GET_LATEST_POST = gql`
   query {
     posts(sort: "Date:desc", pagination: { start: 0, limit: 1 }) {
@@ -216,4 +234,5 @@ export {
   GET_HOME_MEDIA,
   GET_LATEST_POST,
   GET_ALL_INSTA,
+  GET_INSTA_COVER_IMG,
 };
