@@ -8,6 +8,7 @@ export default function Navbar({}: Props) {
       <Link href={'/'}>Home</Link>
       <Link href={'/journal'}>Journal</Link>
       <Link href={'/team'}>Our Team</Link>
+      <Link href={'/instagram'}>Instagram</Link>
     </nav>
   );
 }
