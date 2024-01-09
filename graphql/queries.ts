@@ -163,6 +163,24 @@ const GET_HOME_MEDIA = gql`
   }
 `;
 
+const GET_INSTA_COVER_IMG = gql`
+  query {
+    instaMedia {
+      data {
+        attributes {
+          Cover_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const GET_LATEST_POST = gql`
   query {
     posts(sort: "Date:desc", pagination: { start: 0, limit: 1 }) {
@@ -186,6 +204,26 @@ const GET_LATEST_POST = gql`
   }
 `;
 
+const GET_ALL_INSTA = gql`
+  query {
+    instaPosts(sort: "Date:desc", pagination: { page: 1, pageSize: 100 }) {
+      data {
+        attributes {
+          PostURL
+          CoverImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Date
+        }
+      }
+    }
+  }
+`;
+
 export {
   GET_ALL_POSTS,
   GET_ALL_POSTS_TITLE,
@@ -195,4 +233,6 @@ export {
   GET_POST_BY_TITLE,
   GET_HOME_MEDIA,
   GET_LATEST_POST,
+  GET_ALL_INSTA,
+  GET_INSTA_COVER_IMG,
 };
