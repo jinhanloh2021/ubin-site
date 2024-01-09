@@ -39,7 +39,6 @@ export default function JournalPage({ posts, coverImgSrc }: Props) {
   );
 }
 
-// todo: Pagination for post page. Current just show all posts
 export async function getStaticProps() {
   const {
     data: {

@@ -224,6 +224,24 @@ const GET_ALL_INSTA = gql`
   }
 `;
 
+const GET_MAP_IMG = gql`
+  query {
+    mapMedia {
+      data {
+        attributes {
+          Map_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export {
   GET_ALL_POSTS,
   GET_ALL_POSTS_TITLE,
@@ -235,4 +253,5 @@ export {
   GET_LATEST_POST,
   GET_ALL_INSTA,
   GET_INSTA_COVER_IMG,
+  GET_MAP_IMG,
 };
