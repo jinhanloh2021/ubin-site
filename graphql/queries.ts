@@ -23,9 +23,32 @@ const GET_ALL_POSTS = gql`
   }
 `;
 
+const GET_ALL_POSTS_PAGINATE = (offset: number, limit: number) => gql`
+  query {
+    posts(sort: "Date:desc", pagination: { start: ${offset}, limit: ${limit} }) {
+      data {
+        attributes {
+          Title
+          Date
+          Author
+          Excerpt
+          Video_URL
+          Cover_image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const GET_ALL_POSTS_TITLE = gql`
   query {
-    posts(sort: "Date:desc") {
+    posts(sort: "Date:desc", pagination: { start: 0, limit: 999 }) {
       data {
         attributes {
           Title
@@ -245,6 +268,7 @@ const GET_MAP_IMG = gql`
 export {
   GET_ALL_POSTS,
   GET_ALL_POSTS_TITLE,
+  GET_ALL_POSTS_PAGINATE,
   GET_ALL_MEMBERS,
   GET_TEAM_COVER_IMG,
   GET_JOURNAL_COVER_IMG,

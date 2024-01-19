@@ -4,7 +4,10 @@ import Navbar from '../../components/navbar';
 import PostType from '../../interfaces/PostType';
 import PostPreview from '../../components/post-preview';
 import LandingTitle from '../../components/landing-title';
-import { GET_ALL_POSTS, GET_JOURNAL_COVER_IMG } from '../../graphql/queries';
+import {
+  GET_JOURNAL_COVER_IMG,
+  GET_ALL_POSTS_PAGINATE,
+} from '../../graphql/queries';
 import client from '../../graphql/apollo-client';
 import _ from 'lodash';
 
@@ -63,7 +66,9 @@ export async function getStaticProps() {
       posts: { data: postDataArr },
     },
   } = await client.query({
-    query: GET_ALL_POSTS,
+    query: GET_ALL_POSTS_PAGINATE(0, 999),
+    // variables: { page: 1, limit: 100 },
+    // query: GET_ALL_POSTS,
   });
 
   const posts: PostType[] = postDataArr.map((e: any) => {
