@@ -56,33 +56,25 @@ export default function Journal({ post: { metadata, body } }: Props) {
 }
 
 export async function getStaticPaths() {
-  const {
-    data: {
-      posts: { data: DataArr },
-    },
-  } = await client.query({
-    query: GET_ALL_POSTS_TITLE,
-  });
-  const slugArr: string[] = DataArr.map((e) => _.kebabCase(e.attributes.Title));
+  const response = await client.query({ query: GET_ALL_POSTS_TITLE });
+  const slugArr: string[] = response.data.posts.data.map((post: any) =>
+    _.kebabCase(post.attributes.Title)
+  );
+  const paths = slugArr.map((slug) => ({ params: { slug } }));
   return {
-    paths: slugArr.map((slug) => ({
-      params: { slug },
-    })),
+    paths,
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const {
-    data: {
-      posts: { data: postData },
-    },
-  } = await client.query<GetAllTitleRes>({
+  const response = await client.query<GetAllTitleRes>({
     query: GET_ALL_POSTS_TITLE,
   });
 
-  const title = postData.find((e) => _.kebabCase(e.attributes.Title) === slug)
-    .attributes.Title;
+  const title = response.data.posts.data.find(
+    (post) => _.kebabCase(post.attributes.Title) === slug
+  ).attributes.Title;
 
   const resPost = (
     await client.query({
